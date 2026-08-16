@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Page 10 — USB Evidence</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .dir-listing{ font-family: var(--font-data); font-size:9.5px; border:1px solid var(--ink); margin-top:6mm; }
+  .dir-listing .row{ display:grid; grid-template-columns: 3fr 1fr 2fr 1.4fr; padding:1.5mm 3mm; border-bottom:1px dotted var(--line); }
+  .dir-listing .row.head{ background:#00000010; font-weight:700; text-transform:uppercase; font-size:8px; }
+  .row.recovered{ background: rgba(158,43,37,.08); }
+  .status-tag{ font-size:7.5px; padding:.3mm 1.5mm; border:1px solid var(--stamp-red); color:var(--stamp-red); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-content">
+    <div class="evidence-header">
+      <div class="block">
+        <div class="case-title">USB EVIDENCE — DIRECTORY LISTING</div>
+        <div>USB drive imaged from Devraj Solanki's work laptop, IT Security</div>
+      </div>
+      <div class="block" style="text-align:right;">
+        <div class="label">Evidence No.</div>
+        <div class="value">CDF-001-BL-010</div>
+      </div>
+    </div>
+
+    <div class="chain-of-custody">
+      <div><span>Imaged</span>Feb 26</div>
+      <div><span>Imaged By</span>IT Security, Solvex</div>
+      <div><span>Tool</span>Standard forensic disk image</div>
+      <div><span>Seal</span>Intact</div>
+    </div>
+
+    <div class="dir-listing">
+      <div class="row head"><span>File Name</span><span>Size</span><span>Modified</span><span>Status</span></div>
+      <div class="row"><span>Q4_sales_deck.pptx</span><span>4.1 MB</span><span>Jan 12</span><span>—</span></div>
+      <div class="row"><span>client_contacts.xlsx</span><span>88 KB</span><span>Jan 20</span><span>—</span></div>
+      <div class="row recovered"><span>vendor_list_screenshot.png</span><span>612 KB</span><span>Jan 28, 11:24</span><span class="status-tag">RECOVERED — DELETED</span></div>
+      <div class="row"><span>expense_report_feb.xlsx</span><span>52 KB</span><span>Feb 03</span><span>—</span></div>
+      <div class="row"><span>notes_meeting_offsite.docx</span><span>19 KB</span><span>Feb 05</span><span>—</span></div>
+    </div>
+
+    <div style="margin-top:6mm; display:flex; gap:6mm;">
+      <div class="photo polaroid" style="width:80mm;">
+        <div style="height:45mm; background:#2a2a2a; position:relative;">
+          <svg viewBox="0 0 200 140" width="100%" height="100%">
+            <rect width="200" height="140" fill="#f4f1e8"/>
+            <text x="10" y="20" font-size="9" fill="#333">Approved Vendors — Q1</text>
+            <line x1="10" y1="28" x2="190" y2="28" stroke="#999"/>
+            <text x="10" y="45" font-size="8" fill="#555">Meridian Systems Pvt. Ltd. — INV-M-2201...</text>
+            <text x="10" y="60" font-size="8" fill="#555">Brightpoint Logistics — INV-BL-1187</text>
+            <text x="10" y="75" font-size="8" fill="#555">Kestrel Cloud Services — INV-KC-0932</text>
+          </svg>
+        </div>
+        <div class="caption">Recovered file, thumbnail reconstruction</div>
+      </div>
+      <div style="flex:1; font-size:10.5px;">
+        Recovered file timestamp (Jan 28, 11:24) matches the WhatsApp exchange on Page 8. This is the vendor-list screenshot referenced as "[image attached]."
+      </div>
+    </div>
+
+    <div class="worksheet-box" style="margin-top:6mm;">
+      <div class="wtitle">Recovered Files</div>
+      Circle the deleted file above and note what it connects to.
+      <div class="blank-line" style="margin-top:3mm;"></div>
+    </div>
+  </div>
+
+  <div class="barcode-strip">
+    <div class="barcode"></div>
+    <div>CDF-001-BL &nbsp;•&nbsp; PAGE 10 / 18</div>
+  </div>
+</div>
+</body>
+</html>

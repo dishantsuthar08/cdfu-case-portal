@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investigator Dossier — Cyber Detective Files</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg cdfu-nav sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><span class="brand-mark">CD</span>Cyber Detective Files</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav me-auto ms-lg-4">
+        <li class="nav-item"><a class="nav-link" data-nav="index.html" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" data-nav="cases.html" href="cases.html">Case Files</a></li>
+        <li class="nav-item"><a class="nav-link" data-nav="leaderboard.html" href="leaderboard.html">Bureau Rankings</a></li>
+        <li class="nav-item"><a class="nav-link" data-nav="badges.html" href="badges.html">Evidence Stamps</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0" id="nav-session-slot"></div>
+    </div>
+  </div>
+</nav>
+
+<div id="profile-root"></div>
+
+<footer class="cdfu-footer">
+  <div class="container d-flex flex-wrap justify-content-between gap-3">
+    <div>Cyber Detective Files — Case Portal · fictional cases for training purposes.</div>
+    <div>© <span id="footer-year"></span> CDFU</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+(async () => {
+  await loadRanks();
+  const u = await requireAuth();
+  const root = document.getElementById("profile-root");
+  if (!u) return; // requireAuth() already redirected
+
+  renderNavSession(u);
+  setActiveNav();
+  setFooterYear();
+
+  const [{ cases }, { badges }] = await Promise.all([api("/api/cases"), api("/api/badges")]);
+  const caseById = Object.fromEntries(cases.map((c) => [c.id, c]));
+
+  const rank = rankFor(u.points);
+  const nextGap = rank.next ? rank.next.min - u.points : 0;
+  const solvedCards = u.solvedCases.length
+    ? u.solvedCases.map((id) => {
+        const c = caseById[id];
+        if (!c) return "";
+        return `<div class="folder-card dark mb-3"><span class="tab">${c.code}</span><h3>${c.title}</h3><p class="desc">${c.category} · ${c.points} CP${u.examsPassed.includes(id) ? " · Field Certified" : ""}</p></div>`;
+      }).join("")
+    : `<p class="text-dim small">No files closed yet. <a href="cases.html">Open a case</a>.</p>`;
+
+  const earnedBadges = badges.filter((b) => b.unlocked);
+
+  root.innerHTML = `
+      <header class="hero" style="padding: 3.2rem 0 2.4rem;">
+        <div class="container">
+          <span class="folder-tag">● Investigator Dossier</span>
+          <h1 style="font-size: clamp(1.8rem, 3.4vw, 2.4rem);">${u.name}</h1>
+          <p class="text-data text-dim mb-0">${u.badgeId}</p>
+        </div>
+      </header>
+      <section class="section pt-4">
+        <div class="container">
+          <div class="row g-4 mb-2">
+            <div class="col-md-4">
+              <div class="panel text-center h-100">
+                <div class="stat-num" style="color:${rank.color}; font-size:1.6rem;">${rank.name}</div>
+                <div class="stat-label mt-1">Current Rank</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="panel text-center h-100">
+                <div class="stat-num">${u.points}</div>
+                <div class="stat-label mt-1">Case Points</div>
+                ${rank.next ? `<div class="text-faint small mt-2">${nextGap} CP to ${rank.next.name}</div>` : `<div class="text-faint small mt-2">Top rank reached</div>`}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="panel text-center h-100">
+                <div class="stat-num">${u.solvedCases.length}</div>
+                <div class="stat-label mt-1">Cases Closed</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 mt-1">
+            <div class="col-lg-7">
+              <h2 class="h5 eyebrow mb-3">Closed Files</h2>
+              ${solvedCards}
+            </div>
+            <div class="col-lg-5">
+              <h2 class="h5 eyebrow mb-3">Evidence Stamps Earned</h2>
+              <div class="panel">
+                ${
+                  earnedBadges.length
+                    ? `<div class="row g-3">${earnedBadges
+                        .map((b) => `<div class="col-6"><div class="badge-tile"><div class="stamp-badge">${b.name}</div><div class="b-name">${b.name}</div></div></div>`)
+                        .join("")}</div>`
+                    : `<p class="text-dim small mb-0">None yet — close a case to start earning stamps.</p>`
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+})();
+</script>
+</body>
+</html>

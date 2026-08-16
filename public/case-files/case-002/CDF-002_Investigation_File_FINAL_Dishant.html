@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CYBER DETECTIVE FILES — CDF-002 — OPERATION GHOST GRANT</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  :root{
+    --ink:#16202e; --ink2:#26313f; --red:#a41f2e; --red2:#8a1824;
+    --manila:#efe7d4; --manila2:#e5dcc4; --paper:#ffffff; --graphite:#39424f;
+    --teal:#4a6169; --amber:#c8891f; --line:#c9c2b0; --muted:#6b6a63;
+    --logbg:#f3f4ef; --logline:#d9dcd3;
+  }
+  html,body{margin:0;padding:0;background:#5a5f66;font-family:Arial,Helvetica,sans-serif;color:var(--ink);}
+  .page{
+    position:relative;width:210mm;height:297mm;background:var(--paper);
+    margin:8mm auto;padding:13mm 12mm 15mm 20mm;overflow:hidden;
+    box-shadow:0 3px 14px rgba(0,0,0,.45);page-break-after:always;
+  }
+  .page:last-child{page-break-after:auto;}
+  @media print{
+    html,body{background:#fff;}
+    .page{margin:0;box-shadow:none;}
+  }
+  /* ---- signature: vertical case rail ---- */
+  .rail{position:absolute;top:0;left:0;width:12mm;height:100%;background:var(--ink);
+    color:#e8ecf2;display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+    padding:6mm 0;}
+  .rail .vtxt{writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:3px;
+    font-size:8pt;font-weight:bold;text-transform:uppercase;font-family:"Arial Narrow",Arial;}
+  .rail .perf{display:flex;flex-direction:column;gap:3px;}
+  .rail .perf i{width:4px;height:4px;border-radius:50%;background:#5b6675;display:block;}
+  .rail .cdf{writing-mode:vertical-rl;transform:rotate(180deg);color:var(--red);font-weight:bold;
+    letter-spacing:2px;font-size:9pt;}
+  /* ---- classification band ---- */
+  .classband{display:flex;justify-content:space-between;align-items:center;
+    background:var(--red);color:#fff;font-family:"Arial Narrow",Arial;font-weight:bold;
+    letter-spacing:2px;font-size:8pt;text-transform:uppercase;padding:3px 8px;margin-bottom:6px;}
+  .classband.dark{background:var(--ink);}
+  /* ---- document header ---- */
+  .dochead{border-bottom:2px solid var(--ink);padding-bottom:5px;margin-bottom:9px;}
+  .dochead .unit{font-size:7.5pt;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+  .dochead h1{font-family:"Arial Narrow",Arial;font-size:16pt;margin:2px 0 0;letter-spacing:.5px;
+    text-transform:uppercase;color:var(--ink);}
+  .dochead .sub{font-size:8pt;color:var(--graphite);margin-top:2px;}
+  .doctype{float:right;text-align:right;font-size:7.5pt;color:var(--graphite);line-height:1.4;}
+  /* ---- footer ---- */
+  .foot{position:absolute;left:20mm;right:12mm;bottom:7mm;display:flex;justify-content:space-between;
+    border-top:1px solid var(--line);padding-top:3px;font-size:6.8pt;color:var(--muted);
+    letter-spacing:.5px;text-transform:uppercase;}
+  .foot .pg{font-weight:bold;color:var(--ink);}
+  /* ---- generic bits ---- */
+  h2.sec{font-family:"Arial Narrow",Arial;font-size:10.5pt;text-transform:uppercase;letter-spacing:1px;
+    background:var(--ink);color:#fff;padding:3px 7px;margin:11px 0 6px;}
+  h3.sub{font-family:"Arial Narrow",Arial;font-size:9.5pt;text-transform:uppercase;letter-spacing:.8px;
+    color:var(--ink);border-bottom:1px solid var(--graphite);padding-bottom:2px;margin:9px 0 5px;}
+  p{font-size:9pt;line-height:1.42;margin:5px 0;}
+  .small{font-size:8pt;}
+  .tiny{font-size:7pt;color:var(--muted);}
+  .kv{display:grid;grid-template-columns:38% 62%;font-size:8.4pt;border:1px solid var(--line);}
+  .kv div{padding:3px 6px;border-bottom:1px solid var(--line);}
+  .kv div:nth-child(4n+1),.kv div:nth-child(4n+2){background:#f6f4ee;}
+  .kv .k{font-weight:bold;color:var(--graphite);text-transform:uppercase;font-size:7.6pt;letter-spacing:.4px;}
+  table{width:100%;border-collapse:collapse;font-size:8pt;}
+  .logtable{font-family:ui-monospace,"Consolas","Courier New",monospace;font-size:7.4pt;background:var(--logbg);}
+  .logtable th{background:var(--ink);color:#e8ecf2;text-align:left;padding:3px 5px;font-weight:bold;
+    letter-spacing:.3px;border:1px solid var(--ink);}
+  .logtable td{border:1px solid var(--logline);padding:2.5px 5px;vertical-align:top;}
+  .logtable tr:nth-child(even) td{background:#eceee8;}
+  .datatable th{background:var(--graphite);color:#fff;text-align:left;padding:3px 6px;font-size:7.6pt;
+    text-transform:uppercase;letter-spacing:.4px;border:1px solid var(--graphite);}
+  .datatable td{border:1px solid var(--line);padding:3px 6px;font-size:8pt;vertical-align:top;}
+  .datatable tr:nth-child(even) td{background:#f6f4ee;}
+  .evtag{display:inline-block;background:var(--amber);color:#2a1c00;font-weight:bold;font-size:7pt;
+    padding:1px 5px;border-radius:2px;letter-spacing:.5px;font-family:ui-monospace,monospace;}
+  .evtag.red{background:var(--red);color:#fff;}
+  .evtag.ink{background:var(--ink);color:#fff;}
+  .stamp{position:absolute;border:3px double var(--red);color:var(--red);font-family:"Arial Narrow",Arial;
+    font-weight:bold;text-transform:uppercase;letter-spacing:2px;padding:5px 12px;font-size:13pt;
+    transform:rotate(-9deg);opacity:.82;}
+  .ph{background:repeating-linear-gradient(45deg,#eceae2,#eceae2 8px,#e3e0d5 8px,#e3e0d5 16px);
+    border:1.5px dashed #9a9484;display:flex;align-items:center;justify-content:center;text-align:center;
+    color:#6f6a5c;font-size:8pt;font-weight:bold;letter-spacing:1px;text-transform:uppercase;}
+  .redact{background:#16202e;color:#16202e;padding:0 2px;border-radius:1px;}
+  .flag{border-left:4px solid var(--amber);background:#fdf6e6;padding:5px 8px;font-size:8pt;margin:6px 0;}
+  .note{font-family:"Comic Sans MS","Segoe Print",cursive;color:#1a3a6b;font-size:8.6pt;line-height:1.5;}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+  .box{border:1px solid var(--line);padding:7px 9px;}
+  .box.hd{border-top:3px solid var(--ink);}
+  ul.tight{margin:4px 0;padding-left:16px;font-size:8.4pt;line-height:1.4;}
+  ul.tight li{margin:2px 0;}
+  .sig{margin-top:8px;font-size:8pt;color:var(--graphite);}
+  .sigline{border-top:1px solid var(--ink);width:55mm;margin-top:16px;padding-top:2px;font-size:7.5pt;}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ PAGE 01 — COVER -->
+<section class="page">
+  <div class="rail">
+    <div class="cdf">CDF‑002</div>
+    <div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="vtxt">RESTRICTED&nbsp;·&nbsp;CONFIDENTIAL</div>
+  </div>
+  <div style="text-align:center;margin-top:4mm;">
+    <div style="font-family:'Arial Narrow',Arial;letter-spacing:6px;font-size:11pt;color:var(--muted);">CYBER&nbsp;DETECTIVE&nbsp;FILES&nbsp;™</div>
+    <div style="height:2px;background:var(--ink);margin:6px 18mm;"></div>
+    <div style="font-size:8pt;letter-spacing:3px;color:var(--graphite);text-transform:uppercase;">Digital Forensics &amp; Cyber‑Crime Investigation Series</div>
+  </div>
+
+  <div style="margin:14mm 8mm 0;border:3px solid var(--ink);padding:0;">
+    <div class="classband" style="margin:0;font-size:10pt;justify-content:center;letter-spacing:5px;">RESTRICTED — CONFIDENTIAL — EVIDENCE FILE</div>
+    <div style="padding:9mm 8mm;text-align:center;">
+      <div style="font-size:9pt;letter-spacing:3px;color:var(--muted);">CASE FILE NUMBER</div>
+      <div style="font-family:'Arial Narrow',Arial;font-size:34pt;font-weight:bold;letter-spacing:2px;color:var(--ink);margin:2px 0;">CDF‑002</div>
+      <div style="font-size:9pt;letter-spacing:3px;color:var(--muted);margin-top:6mm;">OPERATION</div>
+      <div style="font-family:'Arial Narrow',Arial;font-size:26pt;font-weight:bold;letter-spacing:3px;color:var(--red);">GHOST&nbsp;GRANT</div>
+      <div style="margin-top:5mm;font-size:9pt;color:var(--graphite);">Unauthorized access to confidential corporate data<br>via an apparently legitimate cloud application.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:2px solid var(--ink);text-align:center;font-size:8pt;">
+      <div style="padding:5mm 2mm;border-right:1px solid var(--line);"><div class="tiny">DIFFICULTY</div><div style="color:var(--amber);font-size:12pt;letter-spacing:1px;">★★★★★</div><div class="tiny">EXPERT</div></div>
+      <div style="padding:5mm 2mm;border-right:1px solid var(--line);"><div class="tiny">EST. DURATION</div><div style="font-weight:bold;font-size:11pt;">3–5 hrs</div><div class="tiny">SINGLE / TEAM</div></div>
+      <div style="padding:5mm 2mm;"><div class="tiny">STATUS</div><div style="font-weight:bold;font-size:11pt;color:var(--red);">OPEN</div><div class="tiny">ACTIVE INQUIRY</div></div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin:12mm 8mm 0;align-items:flex-end;">
+    <div class="ph" style="width:44mm;height:26mm;">[CASE SEAL]</div>
+    <div style="text-align:center;">
+      <div class="ph" style="width:60mm;height:16mm;">[BARCODE]</div>
+      <div class="tiny" style="margin-top:3px;letter-spacing:2px;">CDF‑002‑GHOSTGRANT‑EN</div>
+    </div>
+    <div class="ph" style="width:30mm;height:26mm;">[QR&nbsp;PLACEHOLDER]</div>
+  </div>
+
+  <div style="position:absolute;bottom:16mm;left:20mm;right:12mm;text-align:center;">
+    <div class="tiny" style="letter-spacing:2px;">ISSUED BY THE CYBER CRIME INVESTIGATION UNIT (CCIU) · DIGITAL FORENSICS DIVISION — FICTIONAL</div>
+    <div class="tiny" style="margin-top:3px;">All persons, organizations, domains, addresses and records in this file are fictional. Any resemblance to real entities is coincidental.</div>
+  </div>
+  <div class="foot"><span class="pg">PAGE 01 / 22</span><span>CASE FILE COVER</span><span>CDF‑002 · GHOST GRANT</span></div>
+</section>
+
+<!-- ============================================================ PAGE 02 — COMPLAINT -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">CYBER INCIDENT COMPLAINT</div></div>
+  <div class="classband">RESTRICTED — CONFIDENTIAL<span>FORM CCIU‑COMP‑1</span></div>
+  <div class="dochead">
+    <div class="doctype">DOC&nbsp;E‑001<br>Received 03 JUN 2025<br>Ref: CMP‑2025‑0614</div>
+    <div class="unit">Cyber Crime Investigation Unit · Complaint Intake Desk</div>
+    <h1>Cyber Incident Complaint</h1>
+    <div class="sub">Submitted by an authorized officer of the affected organization</div>
+  </div>
+
+  <div style="font-family:Georgia,'Times New Roman',serif;font-size:9.4pt;line-height:1.5;">
+    <p style="text-align:right;margin:2px 0;">Date of complaint: 03 June 2025</p>
+    <p style="margin:2px 0;">To: The Officer‑in‑Charge, Cyber Crime Investigation Unit (CCIU)</p>
+    <p style="margin:2px 0;">From: Aaron Delgado, Chief Information Security Officer</p>
+    <p style="margin:2px 0;">Organization: Vantage Meridian Technologies (VMT), 1400 Cypress Bend, Suite 900, Austin, TX</p>
+    <p style="margin:8px 0 2px;"><b>Subject: Suspected unauthorized access to confidential corporate data through a third‑party cloud application.</b></p>
+    <p>Respected Sir/Madam,</p>
+    <p>I am writing in my capacity as Chief Information Security Officer of Vantage Meridian Technologies to formally report a suspected data‑security incident affecting confidential corporate information held in our cloud environment.</p>
+    <p>On <b>02 June 2025</b>, members of our Corporate Development team identified that internal, confidential deal documents — maintained under the internal codename <b>&ldquo;Project Lighthouse&rdquo;</b> — had appeared on an external file‑sharing location outside any of our sanctioned systems. These documents are classified <i>Restricted</i> and are accessible to only a small number of employees.</p>
+    <p>Our internal review to date shows <b>no malware, no ransomware, and no forced entry</b> to our network. Instead, the confidential files appear to have been reached through a <b>third‑party productivity application that was authorized against a genuine employee account</b>. The employee in question, a Senior Analyst in Corporate Development, states that she does not recall knowingly granting the access that our logs describe, yet our identity provider records a <b>successful, multi‑factor‑verified authorization</b>.</p>
+    <p>Because the activity resembles ordinary, authorized business use, our team has been unable to determine, with confidence, whether a genuine account was compromised, whether an employee acted deliberately, whether one of our technology vendors was involved, or some combination of these. We therefore request a formal forensic investigation.</p>
+    <p>We have preserved the relevant identity logs, cloud audit records, application authorization records and endpoint images, and will make our IT, SOC, HR and Legal personnel available. I affirm that the statements above are true to the best of my knowledge.</p>
+    <p style="margin-top:8px;">Respectfully submitted,</p>
+  </div>
+  <div class="sig">
+    <div class="sigline">[OFFICER SIGNATURE — DISHANT SUTHAR]</div>
+    Aaron Delgado · CISO, Vantage Meridian Technologies<br>
+    Direct: +1‑512‑555‑0148 · a.delgado@vantagemeridian.example
+  </div>
+  <div class="flag"><b>INTAKE NOTE (desk officer):</b> Complainant is an authorized officer. Incident is non‑ransomware; classified as <b>unauthorized access / data exfiltration via trusted application</b>. Forwarded for registration. <span class="evtag">E‑001</span></div>
+  <div style="position:absolute;bottom:22mm;right:14mm;"><div class="ph" style="width:34mm;height:16mm;">[CONFIDENTIAL STAMP]</div></div>
+  <div class="foot"><span class="pg">PAGE 02 / 22</span><span>CYBER INCIDENT COMPLAINT</span><span>E‑001 · CMP‑2025‑0614</span></div>
+</section>
+
+<!-- ============================================================ PAGE 03 — INTAKE / REGISTRATION -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">CASE INTAKE RECORD</div></div>
+  <div class="classband dark">CCIU — CASE INTAKE &amp; REGISTRATION<span>FORM CCIU‑INT‑2</span></div>
+  <div class="dochead">
+    <div class="doctype">DOC&nbsp;E‑002<br>Registered 03 JUN 2025 · 10:42<br>Intake Officer: Sgt. R. Halvorsen</div>
+    <div class="unit">Digital Forensics Division · Case Registration</div>
+    <h1>Incident Registration Record</h1>
+    <div class="sub">Official intake of a reported cyber incident — internal case record</div>
+  </div>
+
+  <div class="two">
+    <div>
+      <div class="kv">
+        <div class="k">Case number</div><div>CDF‑002</div>
+        <div class="k">Operation name</div><div>GHOST GRANT</div>
+        <div class="k">Complaint ref</div><div>CMP‑2025‑0614 (E‑001)</div>
+        <div class="k">Date registered</div><div>03 June 2025</div>
+        <div class="k">Reported by</div><div>A. Delgado, CISO, VMT</div>
+        <div class="k">Incident type</div><div>Unauthorized data access via trusted third‑party application</div>
+        <div class="k">Sub‑category</div><div>OAuth / application‑consent abuse; data exfiltration</div>
+        <div class="k">Classification</div><div>RESTRICTED / CONFIDENTIAL</div>
+      </div>
+    </div>
+    <div>
+      <div class="kv">
+        <div class="k">Date of discovery</div><div>02 June 2025</div>
+        <div class="k">Est. incident window</div><div>30 May – 02 June 2025</div>
+        <div class="k">Affected org</div><div>Vantage Meridian Technologies</div>
+        <div class="k">Primary affected user</div><div>N. Okafor (VMT‑4471)</div>
+        <div class="k">Malware present?</div><div>None identified to date</div>
+        <div class="k">Ransom demand?</div><div>None</div>
+        <div class="k">Data classification</div><div>Restricted (Corp‑Dev / M&amp;A)</div>
+        <div class="k">Current status</div><div style="color:var(--red);font-weight:bold;">OPEN — ACTIVE</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec">Reported facts as recorded at intake</h2>
+  <ol style="font-size:8.6pt;line-height:1.45;margin:4px 0;padding-left:18px;">
+    <li>Confidential Corporate‑Development documents (&ldquo;Project Lighthouse&rdquo;) were observed on an external location on 02 June 2025.</li>
+    <li>No malware, ransomware, brute‑force, VPN or firewall compromise has been identified by the reporting organization.</li>
+    <li>A third‑party productivity application holds an authorization recorded against a genuine employee account.</li>
+    <li>The identity provider records a successful, MFA‑verified authorization for that account.</li>
+    <li>The primary affected employee denies knowingly granting harmful access.</li>
+    <li>Several employees held access to the affected data; at least two technology vendors have active relationships with the organization.</li>
+  </ol>
+
+  <h2 class="sec">Evidence preserved at registration</h2>
+  <table class="datatable">
+    <tr><th style="width:18%">Item</th><th>Description</th><th style="width:24%">Custody</th></tr>
+    <tr><td>E‑003 – E‑010</td><td>Identity provider logs, MFA records, OAuth/application authorization records</td><td>Digital — hash sealed</td></tr>
+    <tr><td>E‑011 – E‑020</td><td>Cloud drive &amp; mailbox audit logs, application activity logs</td><td>Digital — hash sealed</td></tr>
+    <tr><td>E‑021 – E‑034</td><td>Email, chat, vendor communication, endpoint image, network/DNS/proxy logs</td><td>Digital — hash sealed</td></tr>
+    <tr><td>E‑035 – E‑060</td><td>Statements, HR/finance records, physical/access‑card logs, CCTV references, photographs</td><td>Mixed — see chain of custody</td></tr>
+  </table>
+  <div class="flag" style="margin-top:8px;"><b>REGISTRATION REMARK:</b> Contradiction noted between a valid, MFA‑verified authorization and the user's denial. Case escalated to Digital Forensics Division for full correlation. Assign lead investigator. <span class="evtag ink">E‑002</span></div>
+  <div class="foot"><span class="pg">PAGE 03 / 22</span><span>CASE INTAKE RECORD</span><span>E‑002 · CDF‑002</span></div>
+</section>
+
+<!-- ============================================================ PAGE 04 — ASSIGNMENT ORDER -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">ASSIGNMENT ORDER</div></div>
+  <div class="classband">RESTRICTED — CONFIDENTIAL<span>ORDER CCIU‑ASG‑2</span></div>
+  <div class="dochead">
+    <div class="doctype">DOC&nbsp;E‑003<br>Issued 03 JUN 2025 · 11:15<br>Authority: Div. Commander</div>
+    <div class="unit">Digital Forensics Division · Office of the Divisional Commander</div>
+    <h1>Investigation Assignment Order</h1>
+    <div class="sub">Appointment of lead investigator and definition of scope</div>
+  </div>
+
+  <div class="kv" style="margin-bottom:8px;">
+    <div class="k">Case</div><div>CDF‑002 — OPERATION GHOST GRANT</div>
+    <div class="k">Lead investigator</div><div>Insp. Dishant Suthar — Badge CCIU‑DF‑114</div>
+    <div class="k">Assisting</div><div>Tech. Analyst M. Cho (forensics); Analyst P. Ruiz (identity/cloud)</div>
+    <div class="k">Reporting to</div><div>Divisional Commander, Digital Forensics Division</div>
+    <div class="k">Date assigned</div><div>03 June 2025</div>
+    <div class="k">Priority</div><div style="color:var(--red);font-weight:bold;">HIGH — active data exposure</div>
+  </div>
+
+  <h2 class="sec">Scope of investigation</h2>
+  <p class="small">The lead investigator is authorized to examine all digital and physical evidence lawfully preserved by Vantage Meridian Technologies in connection with the incident registered under CDF‑002, and to interview relevant personnel and vendors. The scope covers the period <b>30 May 2025 to 04 June 2025</b>, extendable on cause.</p>
+
+  <h2 class="sec">Authorized actions</h2>
+  <ul class="tight">
+    <li>Acquire and verify identity‑provider, MFA, and application‑authorization records.</li>
+    <li>Acquire cloud drive, mailbox, and application‑activity audit logs.</li>
+    <li>Acquire endpoint forensic images and network / DNS / proxy / API logs.</li>
+    <li>Record statements from the affected employee, witnesses and persons of interest.</li>
+    <li>Request vendor cooperation from associated third‑party service providers.</li>
+    <li>Maintain chain of custody for every item under the CDF‑002 evidence register.</li>
+  </ul>
+
+  <h2 class="sec">Initial objectives</h2>
+  <div class="two">
+    <ul class="tight">
+      <li>Establish which identity was used and whether it was compromised.</li>
+      <li>Identify the application that received the sensitive permission.</li>
+      <li>Determine how a legitimate trust relationship was abused.</li>
+      <li>Identify which data was accessed and by what mechanism.</li>
+    </ul>
+    <ul class="tight">
+      <li>Establish whether the affected employee acted knowingly.</li>
+      <li>Establish whether any other employee or vendor contributed.</li>
+      <li>Separate authentication events from authorization events.</li>
+      <li>Separate user activity from application activity.</li>
+    </ul>
+  </div>
+
+  <div class="flag"><b>STANDING INSTRUCTION:</b> No conclusion in this case shall rest on a single record. Each material finding must be corroborated by <b>at least three independent evidence sources</b> before it is entered as established.</div>
+
+  <div class="box hd" style="margin-top:8px;">
+    <b style="font-size:8.5pt;">CENTRAL QUESTION FOR THIS INQUIRY</b>
+    <p class="small" style="margin:4px 0 0;">&ldquo;Was the account <b>compromised</b>, or was the account behaving <b>exactly as it was authorized to</b>?&rdquo; Investigators must resolve this before attributing responsibility.</p>
+  </div>
+
+  <div class="sig">
+    <div class="sigline">[OFFICER SIGNATURE — DISHANT SUTHAR]</div>
+    Insp. Dishant Suthar · Lead Investigator, Digital Forensics Division · CCIU
+  </div>
+  <div style="position:absolute;bottom:24mm;right:16mm;"><div class="stamp" style="position:static;display:inline-block;">ASSIGNED</div></div>
+  <div class="foot"><span class="pg">PAGE 04 / 22</span><span>ASSIGNMENT ORDER</span><span>E‑003 · Insp. Whitfield</span></div>
+</section>
+
+<!-- ============================================================ PAGE 05 — VICTIM PROFILE -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">AFFECTED EMPLOYEE PROFILE</div></div>
+  <div class="classband">RESTRICTED — PERSONNEL<span>PROFILE P‑4471</span></div>
+  <div class="dochead">
+    <div class="doctype">DOC&nbsp;E‑035<br>Compiled 03 JUN 2025<br>Source: HR + IT asset registry</div>
+    <div class="unit">Primary affected employee — subject of authorization event</div>
+    <h1>Affected Employee Profile</h1>
+    <div class="sub">Nadia Okafor — Senior Analyst, Corporate Development</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:36mm 1fr;gap:10px;">
+    <div>
+      <div class="ph" style="width:36mm;height:44mm;">[PHOTO: VICTIM]</div>
+      <div class="tiny" style="text-align:center;margin-top:3px;">ID BADGE PHOTO<br>VMT‑4471</div>
+    </div>
+    <div class="kv">
+      <div class="k">Full name</div><div>Nadia A. Okafor</div>
+      <div class="k">Age / DOB</div><div>34 · 12 Sep 1990</div>
+      <div class="k">Position</div><div>Senior Analyst, Corporate Development</div>
+      <div class="k">Employee ID</div><div>VMT‑4471</div>
+      <div class="k">Joined</div><div>14 Mar 2021</div>
+      <div class="k">Work location</div><div>Austin HQ — Floor 9 (Corp‑Dev)</div>
+      <div class="k">Manager</div><div>Trevor Blaine (Director, Corp‑Dev)</div>
+      <div class="k">Normal hours</div><div>09:00 – 18:00 CT, Mon–Fri</div>
+      <div class="k">Email</div><div>nadia.okafor@vantagemeridian.example</div>
+      <div class="k">Phone</div><div>+1‑512‑555‑0177 (VMT‑MB‑231)</div>
+    </div>
+  </div>
+
+  <div class="two" style="margin-top:9px;">
+    <div>
+      <h3 class="sub">Device inventory</h3>
+      <table class="datatable">
+        <tr><th>Asset</th><th>Detail</th></tr>
+        <tr><td>VMT‑LT‑4471</td><td>Laptop, Windows 11, managed</td></tr>
+        <tr><td>VMT‑MB‑231</td><td>Mobile, enrolled MDM</td></tr>
+        <tr><td>Browser</td><td>Profile: nadia.okafor (synced)</td></tr>
+      </table>
+      <h3 class="sub">Access permissions</h3>
+      <ul class="tight">
+        <li>Corp‑Dev SharePoint &amp; Cloud Drive</li>
+        <li><b>Project Lighthouse</b> M&amp;A workspace (Restricted)</li>
+        <li>Slate CRM — read/write (deal records)</li>
+        <li>Standard mailbox &amp; calendar</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="sub">SaaS &amp; OAuth applications</h3>
+      <table class="datatable">
+        <tr><th>Application</th><th>Status</th></tr>
+        <tr><td>Cadence AI (notes)</td><td>Authorized 11 Apr 2025</td></tr>
+        <tr><td>Slate CRM</td><td>SSO (managed)</td></tr>
+        <tr><td>Cloud Drive / Mail</td><td>Core (managed)</td></tr>
+        <tr><td><b>Cadence&nbsp;Sync&nbsp;Connector</b></td><td>Authorized 30 May 2025</td></tr>
+      </table>
+      <h3 class="sub">Habits relevant to inquiry</h3>
+      <ul class="tight">
+        <li>Uses AI note‑taker in nearly all meetings.</li>
+        <li>Accepts calendar invites quickly, often from mobile.</li>
+        <li>Travels to Denver branch ~monthly.</li>
+        <li>Rarely reviews app‑permission screens in detail (self‑reported).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box" style="margin-top:8px;">
+    <b style="font-size:8.5pt;">STATEMENT SUMMARY (see full statement E‑044)</b>
+    <p class="small" style="margin:4px 0 0;">&ldquo;I use the Cadence note‑taker every day. I don't remember approving anything unusual. On Friday afternoon I clicked something to keep my notes tool working — it looked exactly like the sign‑in I always see. I did the phone approval like normal. I never sent any files to anyone.&rdquo;</p>
+  </div>
+  <div class="two" style="margin-top:6px;">
+    <div class="box"><b class="tiny">ALIBI (30 May, 18:00 → 02 Jun)</b><p class="small" style="margin:3px 0 0;">States she left HQ 30 May ~18:10, was at home over the weekend, laptop mostly closed. Badge shows no HQ entry Sat/Sun. Files were accessed during hours she says she was offline.</p></div>
+    <div class="box"><b class="tiny">INVESTIGATOR NOTE</b><p class="small" style="margin:3px 0 0;">Two Cadence‑branded authorizations exist on this account (11 Apr and 30 May). Confirm whether they are the <i>same</i> application. Do not assume. <span class="evtag">E‑035</span></p></div>
+  </div>
+  <div class="foot"><span class="pg">PAGE 05 / 22</span><span>AFFECTED EMPLOYEE PROFILE</span><span>E‑035 · VMT‑4471</span></div>
+</section>
+
+<!-- ============================================================ PAGE 06 — COMPANY DOSSIER -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">ORGANIZATION DOSSIER</div></div>
+  <div class="classband dark">RESTRICTED — ORGANIZATION DOSSIER<span>DOC E‑036</span></div>
+  <div class="dochead">
+    <div class="doctype">DOC&nbsp;E‑036<br>Compiled 03 JUN 2025<br>Source: corporate records</div>
+    <div class="unit">Affected organization — background for investigators</div>
+    <h1>Company Dossier — Vantage Meridian Technologies</h1>
+    <div class="sub">Mid‑sized technology &amp; financial‑services software company</div>
+  </div>
+
+  <div class="two">
+    <div class="kv">
+      <div class="k">Legal name</div><div>Vantage Meridian Technologies, Inc.</div>
+      <div class="k">Industry</div><div>Fintech / financial‑services software</div>
+      <div class="k">Headquarters</div><div>1400 Cypress Bend, Suite 900, Austin, TX</div>
+      <div class="k">Branch office</div><div>55 Larimer Exchange, Floor 3, Denver, CO</div>
+      <div class="k">Employees</div><div>~640</div>
+      <div class="k">Domain</div><div>vantagemeridian.example</div>
+      <div class="k">Identity tenant</div><div>vmt.example (cloud IdP)</div>
+    </div>
+    <div>
+      <h3 class="sub" style="margin-top:0;">Business model</h3>
+      <p class="small" style="margin:2px 0;">Builds payment‑analytics and treasury software for banks and credit unions; also runs a small Corporate‑Development team that evaluates acquisitions of smaller fintech firms. M&amp;A materials are among its most sensitive assets.</p>
+      <h3 class="sub">Critical data</h3>
+      <ul class="tight"><li>Project Lighthouse — M&amp;A due diligence (Restricted)</li><li>Customer financial datasets</li><li>Source code &amp; API keys</li><li>Employee &amp; payroll records</li></ul>
+    </div>
+  </div>
+
+  <h2 class="sec">Departments &amp; key functions</h2>
+  <table class="datatable">
+    <tr><th>Dept.</th><th>Function</th><th>Dept.</th><th>Function</th></tr>
+    <tr><td>Corp‑Dev</td><td>M&amp;A, deal analysis (Project Lighthouse)</td><td>SOC</td><td>Security monitoring / alerts</td></tr>
+    <tr><td>IT / IAM</td><td>Identity, devices, app consent</td><td>Finance</td><td>Payments, vendor invoices</td></tr>
+    <tr><td>HR</td><td>Personnel, onboarding/offboarding</td><td>Legal</td><td>Contracts, compliance</td></tr>
+    <tr><td>Engineering</td><td>Product &amp; API development</td><td>Procurement</td><td>Vendor &amp; SaaS purchasing</td></tr>
+  </table>
+
+  <h2 class="sec">Core systems &amp; security controls</h2>
+  <div class="three">
+    <div class="box"><b class="tiny">IDENTITY &amp; ACCESS</b><ul class="tight"><li>Cloud IdP (SSO)</li><li>MFA (push + number)</li><li>Conditional Access</li><li>App‑consent workflow</li></ul></div>
+    <div class="box"><b class="tiny">DATA &amp; APPS</b><ul class="tight"><li>Cloud Drive + Mail</li><li>Slate CRM</li><li>Git repository</li><li>File server + backup</li></ul></div>
+    <div class="box"><b class="tiny">NETWORK &amp; MONITORING</b><ul class="tight"><li>VPN, firewall, DNS</li><li>Web proxy</li><li>API gateway</li><li>SIEM + endpoint EDR</li></ul></div>
+  </div>
+
+  <h2 class="sec">Third‑party relationships</h2>
+  <table class="datatable">
+    <tr><th style="width:26%">Vendor</th><th>Relationship</th><th style="width:24%">Owner</th></tr>
+    <tr><td><b>Cadenza Labs, Inc.</b></td><td>SaaS AI meeting‑notes assistant (&ldquo;Cadence AI&rdquo;) — used company‑wide</td><td>Procurement (K. Malhotra)</td></tr>
+    <tr><td><b>Brightgate Integrations LLC</b></td><td>Managed integration / cloud‑connector partner; supplies contract engineers</td><td>IT (M. Feld) + Procurement</td></tr>
+  </table>
+
+  <h2 class="sec">Office environment (Austin HQ)</h2>
+  <div class="three" style="gap:6px;">
+    <div class="box small">Reception (G) · Security desk &amp; badge readers</div>
+    <div class="box small">Floor 9 — Corp‑Dev work area &amp; meeting rooms</div>
+    <div class="box small">IT room + server / network room (Floor 2)</div>
+    <div class="box small">Executive area (Floor 10)</div>
+    <div class="box small">Finance area (Floor 4)</div>
+    <div class="box small">Denver branch — Floor 3 shared workspace</div>
+  </div>
+  <div class="foot"><span class="pg">PAGE 06 / 22</span><span>ORGANIZATION DOSSIER</span><span>E‑036 · VMT</span></div>
+</section>
+
+<!-- ============================================================ PAGE 07 — EMPLOYEE DIRECTORY -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">PERSONNEL DIRECTORY</div></div>
+  <div class="classband">RESTRICTED — PERSONNEL DIRECTORY<span>DOC E‑037</span></div>
+  <div class="dochead">
+    <div class="doctype">DOC&nbsp;E‑037<br>Source: HR directory<br>No accusation implied</div>
+    <div class="unit">Personnel with relevant access or proximity to the incident</div>
+    <h1>Employee Directory</h1>
+    <div class="sub">Listing is informational. Inclusion here is not an allegation.</div>
+  </div>
+  <table class="datatable" style="font-size:7.4pt;">
+    <tr><th style="width:15%">Name / ID</th><th style="width:17%">Role · Dept</th><th style="width:9%">Access</th><th>Relevance to inquiry</th></tr>
+    <tr><td><b>Nadia Okafor</b><br>VMT‑4471</td><td>Sr. Analyst · Corp‑Dev</td><td>Lighthouse</td><td>Affected employee. Two Cadence authorizations on her account. Denies knowing consent.</td></tr>
+    <tr><td><b>Trevor Blaine</b><br>VMT‑1902</td><td>Director · Corp‑Dev</td><td>Lighthouse (full)</td><td>Nadia's manager. Heavy access to Lighthouse; recently in contact with an external recruiter.</td></tr>
+    <tr><td><b>Sasha Vinter</b><br>VMT‑4610</td><td>Analyst · Corp‑Dev</td><td>Lighthouse</td><td>Junior analyst; shares meetings/workspace with Nadia. Was at Denver branch late May.</td></tr>
+    <tr><td><b>Marcus Feld</b><br>VMT‑2210</td><td>IAM Admin · IT</td><td>Global admin</td><td>Can register apps &amp; grant admin consent. Handled a consent ticket on 30 May.</td></tr>
+    <tr><td><b>Kiran Malhotra</b><br>VMT‑3305</td><td>Mgr · Procurement</td><td>Vendor systems</td><td>Owns Cadenza Labs &amp; Brightgate contracts. Approved SaaS purchases.</td></tr>
+    <tr><td>Dominic Rourke<br>CTR‑BG‑077</td><td>Contract Eng. · (Brightgate)</td><td>Former IT access</td><td>Offboarded 15 Apr 2025. Account status queried during inquiry.</td></tr>
+    <tr><td>Aaron Delgado<br>VMT‑1005</td><td>CISO · Security</td><td>Security admin</td><td>Complainant. Directed internal review; preserved evidence.</td></tr>
+    <tr><td>Priya Anand<br>VMT‑2288</td><td>SOC Analyst · Security</td><td>SIEM</td><td>Raised the first internal alert flag. Correlated app‑activity anomaly.</td></tr>
+    <tr><td>Elliot Grange<br>VMT‑2201</td><td>IT Helpdesk · IT</td><td>Tier‑1</td><td>Logged the 30 May &ldquo;keep my notes tool working&rdquo; ticket.</td></tr>
+    <tr><td>Renata Voss<br>VMT‑1710</td><td>VP Corp‑Dev · Exec</td><td>Lighthouse (full)</td><td>Deal sponsor. Approves who joins the Lighthouse workspace.</td></tr>
+    <tr><td>Hugo Bennett<br>VMT‑3120</td><td>Analyst · Finance</td><td>Payments</td><td>Processed vendor invoices incl. Cadenza / Brightgate.</td></tr>
+    <tr><td>Camille Ortega<br>VMT‑1420</td><td>HR Manager · HR</td><td>HR records</td><td>Holds onboarding/offboarding &amp; disclosure records.</td></tr>
+    <tr><td>Devin Park<br>VMT‑2905</td><td>Sr. Engineer · Eng</td><td>Git / API</td><td>Owns API keys; unrelated key‑rotation the same week (noise).</td></tr>
+    <tr><td>Laila Haddad<br>VMT‑4188</td><td>Exec Assistant · Exec</td><td>Calendars</td><td>Manages executive calendars; sends many invites.</td></tr>
+    <tr><td>Gregor Mraz<br>VMT‑5001</td><td>Facilities · Ops</td><td>Badge system</td><td>Maintains access‑card and CCTV systems.</td></tr>
+  </table>
+  <div class="flag" style="margin-top:8px;"><b>NOTE:</b> Of the personnel above, five have been designated <b>persons of interest</b> for structured comparison (see Page 17). Designation reflects access and proximity only — not guilt.</div>
+  <div class="foot"><span class="pg">PAGE 07 / 22</span><span>PERSONNEL DIRECTORY</span><span>E‑037 · 15 listed</span></div>
+</section>
+
+<!-- ============================================================ PAGE 08 — INITIAL INCIDENT REPORT -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">INITIAL INCIDENT REPORT</div></div>
+  <div class="classband">RESTRICTED — INITIAL REPORT<span>DOC E‑038</span></div>
+  <div class="dochead">
+    <div class="doctype">DOC&nbsp;E‑038<br>Filed 03 JUN 2025 · 15:20<br>Insp. D. Whitfield</div>
+    <div class="unit">Lead investigator — preliminary findings</div>
+    <h1>Initial Incident Report</h1>
+    <div class="sub">What is known, and what is not, at the opening of the inquiry</div>
+  </div>
+
+  <h2 class="sec">What was discovered</h2>
+  <p class="small">On 02 June 2025, a Corp‑Dev analyst recognized several Project Lighthouse documents on an external file‑sharing page while researching the acquisition target. The CISO confirmed the files matched internal Restricted copies and initiated a review. The review found no malware and no interactive intruder logins, but did find that a Cadence‑branded application held broad, standing access to the affected mailbox and drive.</p>
+
+  <h2 class="sec">How it appears to have happened (preliminary)</h2>
+  <p class="small">The access path runs through an <b>application authorization</b>, not a password breach. A third‑party app was granted permission against Nadia Okafor's account on 30 May 2025. The permission included the ability to read files and mail and to continue doing so <b>without the user being present</b> (offline access). Data access then occurred as <b>application activity</b> over the following days, while the user's own sign‑in records show her offline.</p>
+
+  <div class="two" style="margin-top:6px;">
+    <div class="box hd">
+      <b class="tiny" style="color:var(--ink);">KNOWN FACTS</b>
+      <ul class="tight">
+        <li>Restricted Lighthouse files appeared externally on 02 Jun.</li>
+        <li>A Cadence‑branded app holds broad access to Nadia's data.</li>
+        <li>An MFA‑verified authorization exists dated 30 May 16:12.</li>
+        <li>No malware / ransomware / brute force detected.</li>
+        <li>File access occurred while the user was offline.</li>
+      </ul>
+    </div>
+    <div class="box hd" style="border-top-color:var(--red);">
+      <b class="tiny" style="color:var(--red);">UNKNOWN FACTS</b>
+      <ul class="tight">
+        <li>Whether the 30 May app is the <i>same</i> app used since April.</li>
+        <li>Whether Nadia intended to grant what was granted.</li>
+        <li>Who registered / controls the application.</li>
+        <li>Whether any employee or vendor assisted.</li>
+        <li>Where the data ultimately went, and who benefits.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sec">Preliminary impact</h2>
+  <table class="datatable">
+    <tr><th>Asset</th><th>Exposure</th><th>Confidence</th></tr>
+    <tr><td>Project Lighthouse files (214 items)</td><td>Read / copied via app</td><td>High</td></tr>
+    <tr><td>N. Okafor mailbox (partial)</td><td>Read via app</td><td>Medium</td></tr>
+    <tr><td>Other users' data</td><td>No evidence to date</td><td>—</td></tr>
+  </table>
+
+  <div class="flag"><b>KEY TENSION:</b> Every individual record so far looks <i>legitimate</i>: a real user, real MFA, a real consent screen, a real app talking to real APIs. The inquiry must determine whether &ldquo;legitimate&rdquo; means &ldquo;authorized by the right person for the right purpose.&rdquo; <span class="evtag ink">E‑038</span></div>
+  <div class="foot"><span class="pg">PAGE 08 / 22</span><span>INITIAL INCIDENT REPORT</span><span>E‑038 · CDF‑002</span></div>
+</section>
+
+<!-- ============================================================ PAGE 09 — OAUTH / APP AUTHORIZATION RECORD -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">APP AUTHORIZATION RECORD</div></div>
+  <div class="classband dark">DIGITAL EVIDENCE — IDENTITY / CONSENT<span>DOC E‑004 → E‑008</span></div>
+  <div class="dochead">
+    <div class="doctype">EXPORT<br>Cloud IdP · consent &amp; app registry<br>Hash‑sealed</div>
+    <div class="unit">Application authorization &amp; consent records (raw export)</div>
+    <h1>OAuth / Application Authorization Record</h1>
+    <div class="sub">Presented without interpretation. Investigator to analyze.</div>
+  </div>
+
+  <h3 class="sub" style="margin-top:2px;">A. Consent grants recorded on account VMT‑4471 (N. Okafor)</h3>
+  <table class="logtable">
+    <tr><th>ID</th><th>Timestamp (CT)</th><th>App display name</th><th>Client ID (application)</th><th>MFA</th><th>Result</th></tr>
+    <tr><td>E‑004</td><td>2025‑04‑11 10:03</td><td>Cadence AI</td><td>9b2f1a77‑88ce‑4d1e‑b0a3‑1122ee44aa10</td><td>pass</td><td>consent_granted</td></tr>
+    <tr><td>E‑005</td><td>2025‑05‑30 16:12</td><td>Cadence&nbsp;Sync&nbsp;Connector</td><td>d7c4e2a9‑3b18‑4f60‑9a2e‑5c81b6f0a4d3</td><td>pass</td><td>consent_granted</td></tr>
+  </table>
+
+  <h3 class="sub">B. Requested permission scopes</h3>
+  <table class="logtable">
+    <tr><th>App</th><th>Client ID (short)</th><th>Scopes requested</th><th>Publisher</th></tr>
+    <tr><td>Cadence AI</td><td>9b2f1a77…aa10</td><td>User.Read · OnlineMeetings.Read</td><td>Verified: Cadenza Labs, Inc.</td></tr>
+    <tr><td>Cadence Sync Connector</td><td>d7c4e2a9…a4d3</td><td>User.Read · <b>Files.Read.All</b> · <b>Mail.Read</b> · <b>offline_access</b></td><td><b>Unverified publisher</b></td></tr>
+  </table>
+
+  <h3 class="sub">C. Application registration metadata (app registry)</h3>
+  <table class="logtable">
+    <tr><th>ID</th><th>App</th><th>Registered</th><th>Registered by (account)</th><th>Reply / redirect URL</th></tr>
+    <tr><td>E‑006</td><td>Cadence AI</td><td>2024‑12‑02</td><td>svc‑cadenza@cadenzalabs.example</td><td>https://app.cadenzalabs.example/oauth/cb</td></tr>
+    <tr><td>E‑007</td><td>Cadence Sync Connector</td><td><b>2025‑05‑30 15:47</b></td><td><b>d.rourke@vantagemeridian.example</b></td><td><b>https://cadence‑sync‑app.example/oauth/callback</b></td></tr>
+  </table>
+
+  <h3 class="sub">D. Token / grant reference (E‑008)</h3>
+  <table class="logtable">
+    <tr><th>Grant ref</th><th>App client ID</th><th>Grant type</th><th>offline (refresh)?</th><th>First token issued</th><th>Status</th></tr>
+    <tr><td>GRT‑7741</td><td>9b2f1a77…aa10</td><td>delegated</td><td>no</td><td>2025‑04‑11 10:03</td><td>active</td></tr>
+    <tr><td>GRT‑9920</td><td>d7c4e2a9…a4d3</td><td>delegated</td><td><b>yes</b></td><td>2025‑05‑30 16:12</td><td><b>active</b></td></tr>
+  </table>
+
+  <div class="flag"><b>INVESTIGATOR PROMPT:</b> Two Cadence‑branded authorizations exist on this account. Compare their <b>client IDs</b>, <b>scopes</b>, <b>publisher</b>, and <b>who registered each app</b>. Note whether either grant issued a <b>refresh token</b> (offline_access). Do not assume the two are the same product. Cross‑reference registrant account against Page 18 (access‑card log) and Page 15 (network logs). <span class="evtag">E‑004…E‑008</span></div>
+  <div class="foot"><span class="pg">PAGE 09 / 22</span><span>APP AUTHORIZATION RECORD</span><span>E‑004 – E‑008</span></div>
+</section>
+
+<!-- ============================================================ PAGE 10 — CLOUD ACCESS LOG -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">CLOUD AUDIT LOG</div></div>
+  <div class="classband dark">DIGITAL EVIDENCE — CLOUD AUDIT<span>DOC E‑011 → E‑016</span></div>
+  <div class="dochead">
+    <div class="doctype">EXPORT<br>Cloud Drive + Mail audit<br>UTC → shown in CT</div>
+    <div class="unit">Cloud drive &amp; mailbox activity (raw export)</div>
+    <h1>Cloud Access Log</h1>
+    <div class="sub">Note the &ldquo;actor&rdquo; column: user vs application.</div>
+  </div>
+
+  <h3 class="sub" style="margin-top:2px;">A. Interactive user sign‑ins — account VMT‑4471</h3>
+  <table class="logtable">
+    <tr><th>ID</th><th>Time (CT)</th><th>User</th><th>Client / device</th><th>IP</th><th>Result</th></tr>
+    <tr><td>E‑011</td><td>05‑30 09:02</td><td>okafor</td><td>Laptop VMT‑LT‑4471</td><td>10.9.4.51 (HQ)</td><td>success</td></tr>
+    <tr><td>E‑011</td><td>05‑30 18:07</td><td>okafor</td><td>Mobile VMT‑MB‑231</td><td>10.9.9.20 (HQ‑WiFi)</td><td>success (last)</td></tr>
+    <tr><td>E‑011</td><td>05‑31 —</td><td>okafor</td><td>— none —</td><td>—</td><td>no interactive sign‑in</td></tr>
+    <tr><td>E‑011</td><td>06‑01 —</td><td>okafor</td><td>— none —</td><td>—</td><td>no interactive sign‑in</td></tr>
+    <tr><td>E‑011</td><td>06‑02 08:55</td><td>okafor</td><td>Laptop VMT‑LT‑4471</td><td>10.9.4.51 (HQ)</td><td>success</td></tr>
+  </table>
+
+  <h3 class="sub">B. Drive / mail access attributed to APPLICATION (on behalf of okafor)</h3>
+  <table class="logtable">
+    <tr><th>ID</th><th>Time (CT)</th><th>Actor (app)</th><th>Operation</th><th>Object</th><th>Source IP</th></tr>
+    <tr><td>E‑012</td><td>05‑30 16:14</td><td>Cadence Sync Connector</td><td>token_refresh</td><td>—</td><td>198.51.100.23</td></tr>
+    <tr><td>E‑013</td><td>05‑31 02:41</td><td>Cadence Sync Connector</td><td>files.list</td><td>/CorpDev/Project Lighthouse</td><td>198.51.100.23</td></tr>
+    <tr><td>E‑013</td><td>05‑31 02:44–03:59</td><td>Cadence Sync Connector</td><td>files.download ×186</td><td>/CorpDev/Project Lighthouse/*</td><td>198.51.100.23</td></tr>
+    <tr><td>E‑014</td><td>06‑01 01:10–01:38</td><td>Cadence Sync Connector</td><td>files.download ×28</td><td>/CorpDev/Project Lighthouse/models</td><td>198.51.100.23</td></tr>
+    <tr><td>E‑015</td><td>06‑01 01:52</td><td>Cadence Sync Connector</td><td>mail.read ×41</td><td>okafor mailbox (Lighthouse thread)</td><td>198.51.100.23</td></tr>
+    <tr><td>E‑016</td><td>05‑31 09:20</td><td>Cadence AI</td><td>meeting.read</td><td>okafor calendar (notes)</td><td>203.0.113.9 (Cadenza)</td></tr>
+  </table>
+
+  <div class="two" style="margin-top:6px;">
+    <div class="box"><b class="tiny">READING AID</b><p class="small" style="margin:3px 0 0;">&ldquo;Interactive sign‑in&rdquo; = a person logging in. &ldquo;Application activity&rdquo; = an app using a previously issued token. An app with <b>offline access</b> can act while the user is away.</p></div>
+    <div class="box"><b class="tiny">OBSERVATION SPACE</b><p class="small" style="margin:3px 0 0;">Compare the <b>times</b> of the bulk downloads (Section B) with the user's interactive sign‑ins (Section A). Compare the <b>source IPs</b> against Page 15. ______________________</p></div>
+  </div>
+  <div class="flag"><b>INVESTIGATOR PROMPT:</b> 214 Lighthouse objects were downloaded across 31 May – 01 Jun. Were any of these performed while the user was interactively signed in? Which app performed them? Which IP? <span class="evtag">E‑011…E‑016</span></div>
+  <div class="foot"><span class="pg">PAGE 10 / 22</span><span>CLOUD ACCESS LOG</span><span>E‑011 – E‑016</span></div>
+</section>
+
+<!-- ============================================================ PAGE 11 — EMAIL EVIDENCE -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">EMAIL EVIDENCE</div></div>
+  <div class="classband">DIGITAL EVIDENCE — EMAIL<span>DOC E‑021 / E‑022</span></div>
+  <div class="dochead">
+    <div class="doctype">PRINTOUT<br>Mailbox export (headers kept)<br>Hash‑sealed</div>
+    <div class="unit">Email thread recovered from calendar / mailbox</div>
+    <h1>Email &amp; Invitation Evidence</h1>
+    <div class="sub">Presented as printed. Investigator to assess authenticity.</div>
+  </div>
+
+  <div style="border:1px solid var(--line);padding:8px 10px;margin-bottom:8px;font-family:Arial;">
+    <div style="border-bottom:1px solid var(--line);padding-bottom:5px;font-size:8pt;line-height:1.5;">
+      <b>From:</b> Cadence Notes &lt;noreply@cadence‑sync‑app.example&gt;<br>
+      <b>To:</b> Nadia Okafor &lt;nadia.okafor@vantagemeridian.example&gt;<br>
+      <b>Date:</b> Fri, 30 May 2025 15:52 CT &nbsp;·&nbsp; <b>Subject:</b> Action needed: reconnect your Cadence notes<br>
+      <b>X‑Origin‑IP:</b> 203.0.113.44 &nbsp; <b>SPF:</b> softfail &nbsp; <b>DKIM:</b> none &nbsp; <span class="evtag red">E‑021</span>
+    </div>
+    <div style="font-size:8.6pt;line-height:1.5;padding-top:6px;">
+      <p style="margin:3px 0;">Hi Nadia,</p>
+      <p style="margin:3px 0;">Your Cadence notes assistant needs to be reconnected to keep transcribing your meetings. This takes a few seconds and uses your normal sign‑in.</p>
+      <p style="margin:3px 0;"><span style="background:#e8eef7;border:1px solid #9db4d6;padding:2px 10px;border-radius:3px;color:#1a3a6b;font-weight:bold;">▶ Reconnect Cadence</span> &nbsp;<span class="tiny">(links to cadence‑sync‑app.example/authorize)</span></p>
+      <p style="margin:3px 0;">You may be asked to approve on your phone — that's expected. Thanks!</p>
+      <p style="margin:3px 0;">— The Cadence Team</p>
+    </div>
+  </div>
+
+  <div style="border:1px solid var(--line);padding:8px 10px;margin-bottom:8px;font-family:Arial;">
+    <div style="border-bottom:1px solid var(--line);padding-bottom:5px;font-size:8pt;line-height:1.5;">
+      <b>From:</b> Nadia Okafor &nbsp; <b>To:</b> IT Helpdesk &lt;helpdesk@vantagemeridian.example&gt;<br>
+      <b>Date:</b> Fri, 30 May 2025 16:20 CT &nbsp;·&nbsp; <b>Subject:</b> Re: reconnect your Cadence notes <span class="evtag">E‑022</span>
+    </div>
+    <div style="font-size:8.6pt;line-height:1.5;padding-top:6px;">
+      <p style="margin:3px 0;">Hi — I clicked the &ldquo;reconnect&rdquo; thing for my notes tool and approved it on my phone. It said success but the app looks the same as before. Just flagging in case it was something I shouldn't have done. Have a good weekend.</p>
+    </div>
+  </div>
+
+  <div class="box" style="margin-bottom:6px;">
+    <b class="tiny">GENUINE VENDOR MAIL FOR COMPARISON (E‑023)</b>
+    <p class="small" style="margin:3px 0 0;"><b>From:</b> Cadenza Labs &lt;support@cadenzalabs.example&gt; · <b>SPF:</b> pass · <b>DKIM:</b> pass · earlier routine mail signed by the verified publisher domain. Compare sender domain, SPF/DKIM and link target with E‑021.</p>
+  </div>
+
+  <div class="flag"><b>INVESTIGATOR PROMPT:</b> Compare the sender domain, authentication results (SPF/DKIM) and link target of E‑021 against the genuine vendor mail E‑023 and against the app registration in E‑007. Does the &ldquo;reconnect&rdquo; message point to the verified vendor, or somewhere else? <span class="evtag red">E‑021 · E‑022 · E‑023</span></div>
+  <div class="foot"><span class="pg">PAGE 11 / 22</span><span>EMAIL EVIDENCE</span><span>E‑021 – E‑023</span></div>
+</section>
+
+<!-- ============================================================ PAGE 12 — INTERNAL CHAT EVIDENCE -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">INTERNAL CHAT EXPORT</div></div>
+  <div class="classband">DIGITAL EVIDENCE — CHAT<span>DOC E‑024 / E‑025</span></div>
+  <div class="dochead">
+    <div class="doctype">EXPORT<br>Workspace chat (retention copy)<br>Timestamps CT</div>
+    <div class="unit">Internal messaging — recovered conversations</div>
+    <h1>Internal Chat Evidence</h1>
+    <div class="sub">Includes at least one message later deleted by its sender.</div>
+  </div>
+
+  <style>
+    .chat{border:1px solid var(--line);padding:8px;background:#f7f8fa;}
+    .msg{margin:6px 0;font-size:8.4pt;}
+    .msg .who{font-weight:bold;color:var(--ink);}
+    .msg .t{color:var(--muted);font-size:7pt;margin-left:4px;}
+    .msg .b{background:#fff;border:1px solid #dfe3ea;border-radius:6px;padding:4px 7px;display:inline-block;margin-top:2px;max-width:92%;}
+    .del{border-left:3px solid var(--red);background:#fbeced;}
+  </style>
+
+  <h3 class="sub" style="margin-top:2px;">Channel: #corpdev‑lighthouse (E‑024)</h3>
+  <div class="chat">
+    <div class="msg"><span class="who">Trevor Blaine</span><span class="t">30 May 14:58</span><div class="b">Team — Lighthouse model v9 is final for the Tuesday board pre‑read. Do NOT circulate outside the workspace.</div></div>
+    <div class="msg"><span class="who">Nadia Okafor</span><span class="t">30 May 15:01</span><div class="b">Got it. I'll have my notes from the diligence call in the folder by EOD.</div></div>
+    <div class="msg"><span class="who">Sasha Vinter</span><span class="t">30 May 15:04</span><div class="b">I can compile the appendix. I'm at the Denver desk today if anyone needs the shared machine files.</div></div>
+    <div class="msg"><span class="who">Nadia Okafor</span><span class="t">30 May 16:22</span><div class="b">My notes tool made me reconnect just now, approved on my phone. Weird but seems fine 🤷</div></div>
+    <div class="msg"><span class="who">Sasha Vinter</span><span class="t">30 May 16:23</span><div class="b">Yeah mine did that last week too, totally normal.</div></div>
+  </div>
+
+  <h3 class="sub">Direct messages: S. Vinter ↔ (external, personal handle) — retention copy (E‑025)</h3>
+  <div class="chat">
+    <div class="msg del"><span class="who">Sasha Vinter</span><span class="t">30 May 12:31 · <i>deleted 02 Jun 09:14</i></span><div class="b">need the lighthouse set off my plate this week, then I'm clear on the thing we discussed</div></div>
+    <div class="msg del"><span class="who">[external]</span><span class="t">30 May 12:33 · <i>deleted</i></span><div class="b">just get it somewhere I can pull it. don't email it to yourself, that's how people get caught</div></div>
+    <div class="msg"><span class="who">Sasha Vinter</span><span class="t">30 May 12:34</span><div class="b">relax. using the notes connector route. looks like the tool everyone already uses</div></div>
+  </div>
+
+  <div class="flag"><b>INVESTIGATOR PROMPT:</b> Message E‑025 was deleted from the client but recovered from retention. Note the phrase &ldquo;the notes connector route&rdquo; and &ldquo;the tool everyone already uses.&rdquo; Corroborate the sender's stated <b>location</b> (E‑024, 15:04) against the access‑card log (Page 18) and the app‑registration source IP (Page 15) before drawing any conclusion. A single chat is not proof. <span class="evtag red">E‑024 · E‑025</span></div>
+  <div class="box" style="margin-top:6px;"><b class="tiny">CONTEXT NOTE</b><p class="small" style="margin:3px 0 0;">Several employees said the &ldquo;reconnect&rdquo; prompt felt routine (E‑024). Investigators should not treat &ldquo;it seemed normal&rdquo; as evidence of innocence <i>or</i> guilt — it explains why a lookalike prompt could succeed.</p></div>
+  <div class="foot"><span class="pg">PAGE 12 / 22</span><span>INTERNAL CHAT EVIDENCE</span><span>E‑024 · E‑025</span></div>
+</section>
+
+<!-- ============================================================ PAGE 13 — VENDOR COMMUNICATION -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">VENDOR COMMUNICATION</div></div>
+  <div class="classband">EVIDENCE — VENDOR CORRESPONDENCE<span>DOC E‑026 → E‑029</span></div>
+  <div class="dochead">
+    <div class="doctype">TICKETS + EMAIL<br>Cadenza Labs &amp; Brightgate<br>Collected 04 JUN 2025</div>
+    <div class="unit">Third‑party vendor communications</div>
+    <h1>Vendor Communication</h1>
+    <div class="sub">Two vendors. Establish which — if either — is involved.</div>
+  </div>
+
+  <h3 class="sub" style="margin-top:2px;">Cadenza Labs — support ticket CZ‑88214 (E‑026)</h3>
+  <table class="datatable">
+    <tr><th style="width:22%">Field</th><th>Value</th></tr>
+    <tr><td>From</td><td>support@cadenzalabs.example (verified publisher)</td></tr>
+    <tr><td>Re</td><td>&ldquo;Did you release a new &lsquo;Cadence Sync Connector&rsquo; app?&rdquo;</td></tr>
+    <tr><td>Response</td><td>&ldquo;We have no product named <b>Cadence Sync Connector</b>. Our only application is <b>Cadence AI</b> (client ID 9b2f1a77…aa10), published under our verified account. We did not register any app in your tenant on 30 May. Please treat any lookalike as unauthorized.&rdquo;</td></tr>
+    <tr><td>Note</td><td>Cadenza confirms its app requests only User.Read + OnlineMeetings.Read and does <b>not</b> request Files or Mail scopes.</td></tr>
+  </table>
+
+  <h3 class="sub">Brightgate Integrations — email thread (E‑027 / E‑028)</h3>
+  <table class="datatable">
+    <tr><th style="width:22%">Field</th><th>Value</th></tr>
+    <tr><td>From</td><td>accounts@brightgate‑integrations.example</td></tr>
+    <tr><td>Subject</td><td>Re: offboarding confirmation — contractor D. Rourke</td></tr>
+    <tr><td>Body (E‑027)</td><td>&ldquo;D. Rourke concluded his engagement on 15 Apr 2025 and relocated overseas. Per our records he returned his hardware and had no further access. We were told VMT would disable his tenant account.&rdquo;</td></tr>
+    <tr><td>Body (E‑028)</td><td>Brightgate invoice history attached: routine monthly integration retainer; no charge or activity logged for 30 May – 02 Jun.</td></tr>
+  </table>
+
+  <div class="box" style="margin-top:6px;">
+    <b class="tiny">PROCUREMENT NOTE (E‑029)</b>
+    <p class="small" style="margin:3px 0 0;">K. Malhotra (Procurement) forwarded both vendor contracts and a note: &ldquo;Cadenza referral‑partner bonus was disclosed to HR in Feb; nothing hidden. Brightgate retainer is standard. Neither vendor requested new scopes from us.&rdquo; Disclosure record cross‑filed as E‑052 (HR).</p>
+  </div>
+
+  <div class="flag"><b>INVESTIGATOR PROMPT:</b> The suspect application carries a <b>Cadence</b> name but Cadenza Labs disavows it (E‑026). Brightgate's former contractor account appears as the app <i>registrant</i> in E‑007 — yet Brightgate states that account should have been disabled and that Rourke was overseas (E‑027). Determine: is a vendor the attacker, or is a <b>vendor identity being misused</b>? Corroborate with Pages 9, 15 and 18. <span class="evtag">E‑026 – E‑029</span></div>
+  <div class="foot"><span class="pg">PAGE 13 / 22</span><span>VENDOR COMMUNICATION</span><span>E‑026 – E‑029</span></div>
+</section>
+
+<!-- ============================================================ PAGE 14 — ENDPOINT FORENSIC SUMMARY -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">ENDPOINT FORENSICS</div></div>
+  <div class="classband dark">DIGITAL EVIDENCE — ENDPOINT<span>DOC E‑030 → E‑033</span></div>
+  <div class="dochead">
+    <div class="doctype">FORENSIC IMAGE SUMMARY<br>Two devices examined<br>Analyst: M. Cho</div>
+    <div class="unit">Endpoint timeline, browser artifacts, extensions, downloads</div>
+    <h1>Endpoint Forensic Summary</h1>
+    <div class="sub">Nadia's laptop (VMT‑LT‑4471) and a shared Denver workstation (VMT‑WS‑DEN‑02)</div>
+  </div>
+
+  <h3 class="sub" style="margin-top:2px;">A. N. Okafor laptop VMT‑LT‑4471 — browser history (E‑030)</h3>
+  <table class="logtable">
+    <tr><th>Time (CT)</th><th>URL / activity</th><th>Note</th></tr>
+    <tr><td>05‑30 15:52</td><td>mail: &ldquo;reconnect your Cadence notes&rdquo; opened</td><td>from mobile push preview</td></tr>
+    <tr><td>05‑30 16:10</td><td>cadence‑sync‑app.example/authorize</td><td>consent screen loaded</td></tr>
+    <tr><td>05‑30 16:12</td><td>login.vmt.example/consent → success</td><td>redirect back to sync‑app</td></tr>
+    <tr><td>05‑30 16:12</td><td>MFA push approved (mobile)</td><td>matches E‑005</td></tr>
+    <tr><td>05‑31 – 06‑01</td><td>— device asleep / no browsing —</td><td>corroborates alibi</td></tr>
+  </table>
+  <p class="tiny" style="margin:3px 0;">No malicious executable, no C2 beacon, no suspicious extension found on VMT‑LT‑4471. Browser extensions: 2 (ad‑blocker, grammar tool) — benign. <span class="evtag">E‑030</span></p>
+
+  <h3 class="sub">B. Shared Denver workstation VMT‑WS‑DEN‑02 — timeline (E‑031)</h3>
+  <table class="logtable">
+    <tr><th>Time (CT)</th><th>Signed‑in profile</th><th>Activity</th></tr>
+    <tr><td>05‑30 15:33</td><td>s.vinter</td><td>portal.vmt.example/appregistrations (new app)</td></tr>
+    <tr><td>05‑30 15:41</td><td>s.vinter</td><td>account switch → d.rourke (saved creds in browser vault)</td></tr>
+    <tr><td>05‑30 15:47</td><td>d.rourke</td><td>app &ldquo;Cadence Sync Connector&rdquo; created; redirect set to cadence‑sync‑app.example</td></tr>
+    <tr><td>05‑30 15:50</td><td>d.rourke</td><td>copied client ID / secret to clipboard</td></tr>
+    <tr><td>05‑30 16:31</td><td>s.vinter</td><td>browser history cleared (partial; recovered from disk)</td></tr>
+  </table>
+
+  <div class="two" style="margin-top:6px;">
+    <div class="box"><b class="tiny">DOWNLOADS / LOGIN ACTIVITY (E‑032)</b><ul class="tight"><li>No Lighthouse files were downloaded to either <i>laptop</i>.</li><li>The 214 downloads occurred via <b>application API</b>, not a browser (see Page 10).</li><li>d.rourke account: no interactive login except via VMT‑WS‑DEN‑02 on 30 May.</li></ul></div>
+    <div class="box"><b class="tiny">DEVICE TIMELINE FLAGS (E‑033)</b><ul class="tight"><li>Account‑switch on a shared machine ties two profiles to one session.</li><li>History clearing on VMT‑WS‑DEN‑02 was partial; disk carving recovered entries.</li><li>Compare profile <b>s.vinter</b> presence with badge log (Page 18).</li></ul></div>
+  </div>
+  <div class="flag"><b>INVESTIGATOR PROMPT:</b> The dormant account <b>d.rourke</b> registered the app (E‑007) — but the endpoint shows the session was driven from profile <b>s.vinter</b> on a shared machine before switching accounts (E‑031). Who physically sat at VMT‑WS‑DEN‑02? Corroborate with badge/CCTV (Page 18) and network source IP (Page 15). <span class="evtag red">E‑031</span></div>
+  <div class="foot"><span class="pg">PAGE 14 / 22</span><span>ENDPOINT FORENSIC SUMMARY</span><span>E‑030 – E‑033</span></div>
+</section>
+
+<!-- ============================================================ PAGE 15 — NETWORK / DNS / API LOGS -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">NETWORK · DNS · API</div></div>
+  <div class="classband dark">DIGITAL EVIDENCE — NETWORK<span>DOC E‑017 → E‑020</span></div>
+  <div class="dochead">
+    <div class="doctype">EXPORT<br>Proxy · DNS · API gateway<br>Fictional doc ranges</div>
+    <div class="unit">Network, DNS, proxy &amp; API records (raw export)</div>
+    <h1>Network / DNS / API Logs</h1>
+    <div class="sub">Includes both relevant entries and routine noise.</div>
+  </div>
+
+  <h3 class="sub" style="margin-top:2px;">A. DNS resolutions of interest (E‑017)</h3>
+  <table class="logtable">
+    <tr><th>Time</th><th>Query</th><th>Resolved IP</th><th>Requesting host</th></tr>
+    <tr><td>05‑30 15:33</td><td>portal.vmt.example</td><td>10.9.2.10</td><td>VMT‑WS‑DEN‑02</td></tr>
+    <tr><td>05‑30 15:46</td><td>cadence‑sync‑app.example</td><td>203.0.113.44</td><td>VMT‑WS‑DEN‑02</td></tr>
+    <tr><td>05‑31 02:40</td><td>cadence‑sync‑app.example</td><td>198.51.100.23</td><td>(external app)</td></tr>
+    <tr><td>05‑30 09:12</td><td>app.cadenzalabs.example</td><td>203.0.113.9</td><td>VMT‑LT‑4471 (routine)</td></tr>
+  </table>
+
+  <h3 class="sub">B. Web proxy — outbound (E‑018)</h3>
+  <table class="logtable">
+    <tr><th>Time</th><th>Src</th><th>Destination</th><th>Bytes</th><th>Note</th></tr>
+    <tr><td>05‑30 15:47</td><td>VMT‑WS‑DEN‑02</td><td>cadence‑sync‑app.example/register</td><td>18 KB</td><td>app setup</td></tr>
+    <tr><td>05‑31 02:44–03:59</td><td>198.51.100.23</td><td>drive API (pull) → cadence‑sync‑app.example</td><td>142 MB</td><td><b>bulk transfer</b></td></tr>
+    <tr><td>06‑01 01:10–01:52</td><td>198.51.100.23</td><td>drive/mail API → cadence‑sync‑app.example</td><td>39 MB</td><td>second pull</td></tr>
+    <tr><td>05‑30 11:02</td><td>VMT‑LT‑2905</td><td>git.vantagemeridian.example</td><td>7 MB</td><td>routine (Devin Park)</td></tr>
+  </table>
+
+  <h3 class="sub">C. API gateway — token &amp; app calls (E‑019)</h3>
+  <table class="logtable">
+    <tr><th>Time</th><th>Client ID</th><th>Grant</th><th>Endpoint</th><th>Result</th></tr>
+    <tr><td>05‑30 16:12</td><td>d7c4e2a9…a4d3</td><td>authorization_code</td><td>/oauth/token</td><td>200 (refresh issued)</td></tr>
+    <tr><td>05‑31 02:41</td><td>d7c4e2a9…a4d3</td><td><b>refresh_token</b></td><td>/oauth/token</td><td>200 (access issued)</td></tr>
+    <tr><td>06‑01 01:09</td><td>d7c4e2a9…a4d3</td><td>refresh_token</td><td>/oauth/token</td><td>200</td></tr>
+    <tr><td>04‑11 10:03</td><td>9b2f1a77…aa10</td><td>authorization_code</td><td>/oauth/token</td><td>200 (no refresh)</td></tr>
+  </table>
+
+  <div class="box" style="margin-top:6px;"><b class="tiny">ROUTINE NOISE FOR ELIMINATION (E‑020)</b><p class="small" style="margin:3px 0 0;">Same week: unusual VPN login for user <i>h.bennett</i> from a hotel network (later confirmed travel); one blocked personal‑cloud upload attempt by <i>e.grange</i> (policy warning, no data left); API‑key rotation by <i>d.park</i>. None of these touch the Lighthouse objects or 198.51.100.23. Treat as red herrings pending elimination.</p></div>
+  <div class="flag"><b>INVESTIGATOR PROMPT:</b> The app‑registration DNS/proxy traffic on 30 May originates from <b>VMT‑WS‑DEN‑02</b> (203.0.113.44 egress); the bulk data pulls on 31 May – 01 Jun come from <b>198.51.100.23</b> using the <b>refresh token</b> of client d7c4e2a9…a4d3. Tie the registration host to a person via Page 18. <span class="evtag red">E‑017 – E‑019</span></div>
+  <div class="foot"><span class="pg">PAGE 15 / 22</span><span>NETWORK / DNS / API LOGS</span><span>E‑017 – E‑020</span></div>
+</section>
+
+<!-- ============================================================ PAGE 16 — WITNESS / EMPLOYEE STATEMENTS -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">STATEMENTS</div></div>
+  <div class="classband">EVIDENCE — RECORDED STATEMENTS<span>DOC E‑044 → E‑047</span></div>
+  <div class="dochead">
+    <div class="doctype">INTERVIEW RECORD<br>Recorded &amp; transcribed<br>Insp. Whitfield</div>
+    <div class="unit">Statements of the affected employee and witnesses</div>
+    <h1>Witness &amp; Employee Statements</h1>
+    <div class="sub">Contradictions are preserved deliberately.</div>
+  </div>
+
+  <div class="box hd" style="margin-bottom:7px;">
+    <b class="tiny" style="color:var(--ink);">STATEMENT — N. OKAFOR (affected employee) · E‑044</b>
+    <p class="small" style="margin:4px 0 0;">&ldquo;I approved the reconnect because it looked exactly like the Cadence sign‑in I always use. I did MFA on my phone like normal. I did not download or send any Lighthouse files. I was home all weekend. I flagged it to the helpdesk right after because it felt slightly off.&rdquo;</p>
+  </div>
+
+  <div class="two">
+    <div class="box"><b class="tiny">STATEMENT — M. FELD (IAM Admin) · E‑045</b><p class="small" style="margin:3px 0 0;">&ldquo;On 30 May I got a helpdesk ticket to &lsquo;keep the Cadence notes tool working.&rsquo; I did <b>not</b> grant admin consent to any new app. When SOC flagged odd token refreshes on 02 Jun, <b>I</b> escalated it. I never touched the Rourke account — I'd assumed HR disabled it in April.&rdquo;</p></div>
+    <div class="box"><b class="tiny">STATEMENT — S. VINTER (analyst) · E‑046</b><p class="small" style="margin:3px 0 0;">&ldquo;I was at the Denver desk finishing the Lighthouse appendix. I used the shared workstation for a while. I don't know anything about a new app. My notes tool asked me to reconnect too — everyone's did.&rdquo; <span class="evtag red">compare with E‑024 / E‑031 / E‑047</span></p></div>
+  </div>
+
+  <div class="box" style="margin-top:7px;"><b class="tiny">STATEMENT — G. MRAZ (Facilities) · E‑047</b><p class="small" style="margin:3px 0 0;">&ldquo;The Denver Floor‑3 badge system was fully online 30 May. VMT‑WS‑DEN‑02 is a shared machine but it sits in a card‑controlled area — you must badge in to reach it. CCTV in that room was recording. I can pull the badge‑in list for that afternoon.&rdquo;</p></div>
+
+  <div class="flag"><b>CONTRADICTIONS TO RESOLVE:</b>
+    <ul class="tight" style="margin-top:3px;">
+      <li>Okafor says she granted nothing harmful — yet a broad, refresh‑token grant sits on her account (E‑005/E‑008).</li>
+      <li>Vinter says she &ldquo;doesn't know anything about a new app&rdquo; — yet the shared‑machine timeline (E‑031) shows the app created from her session before an account switch.</li>
+      <li>Feld looks the most capable of doing this — yet he is the one who <i>escalated</i> it and never used the Rourke account.</li>
+    </ul>
+    Each contradiction must be tested against independent records (Pages 9, 10, 14, 15, 18) — not resolved by statement alone.
+  </div>
+  <div class="foot"><span class="pg">PAGE 16 / 22</span><span>WITNESS &amp; EMPLOYEE STATEMENTS</span><span>E‑044 – E‑047</span></div>
+</section>
+
+<!-- ============================================================ PAGE 17 — SUSPECT INFORMATION SHEET -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">PERSONS OF INTEREST</div></div>
+  <div class="classband">RESTRICTED — PERSONS OF INTEREST<span>DOC E‑048</span></div>
+  <div class="dochead">
+    <div class="doctype">COMPARISON SHEET<br>Factual only<br>No accusation implied</div>
+    <div class="unit">Five persons of interest — structured comparison</div>
+    <h1>Suspect Information Sheet</h1>
+    <div class="sub">Every person has both incriminating and exculpating facts.</div>
+  </div>
+  <table class="datatable" style="font-size:7.3pt;">
+    <tr><th style="width:13%">Person</th><th style="width:19%">Access / opportunity</th><th style="width:20%">Possible motive</th><th style="width:24%">Points toward</th><th>Points away</th></tr>
+    <tr>
+      <td><b>Marcus Feld</b><br>IAM Admin</td>
+      <td>Global admin; can register apps &amp; grant admin consent</td>
+      <td>None established</td>
+      <td>Maximum technical means; handled a consent ticket 30 May</td>
+      <td>Did not grant admin consent (E‑045); <b>escalated</b> the anomaly; never used Rourke acct; alibi</td>
+    </tr>
+    <tr>
+      <td><b>Trevor Blaine</b><br>Director, Corp‑Dev</td>
+      <td>Full Lighthouse access; heavy file use</td>
+      <td>Passed over; recruiter contact at a rival</td>
+      <td>Most to gain from leaking a deal; large download counts</td>
+      <td>His access is job‑normal; no link to the app/registration; recruiter talk = ordinary job search</td>
+    </tr>
+    <tr>
+      <td><b>Kiran Malhotra</b><br>Procurement</td>
+      <td>Owns vendor contracts &amp; approvals</td>
+      <td>Alleged vendor kickback</td>
+      <td>Suspicious closeness to Cadenza &amp; Brightgate</td>
+      <td>Referral bonus disclosed to HR (E‑052); no technical action; no data access</td>
+    </tr>
+    <tr>
+      <td><b>Sasha Vinter</b><br>Analyst, Corp‑Dev</td>
+      <td>Lighthouse access; at Denver shared workstation 30 May</td>
+      <td>Personal financial pressure (see E‑053)</td>
+      <td>Shared‑machine session tied to app creation (E‑031); deleted DMs (E‑025)</td>
+      <td>Appears junior/low‑profile; claims the reconnect &ldquo;was normal for everyone&rdquo;</td>
+    </tr>
+    <tr>
+      <td><b>Dominic Rourke</b><br>Former contractor</td>
+      <td>Account listed as app registrant (E‑007)</td>
+      <td>Disgruntled offboarding?</td>
+      <td>His account created the malicious app</td>
+      <td>Offboarded 15 Apr; overseas; no device/badge presence; account should have been disabled</td>
+    </tr>
+  </table>
+
+  <div class="two" style="margin-top:7px;">
+    <div class="box"><b class="tiny">DESIGN OF THIS SHEET</b><ul class="tight"><li>One suspect looks <b>extremely guilty</b> by capability (Feld).</li><li>One has the strongest <b>financial gain</b> (Blaine).</li><li>One has a suspicious <b>vendor</b> tie (Malhotra).</li><li>One appears <b>innocent / low‑profile</b> (Vinter).</li><li>One is an obvious <b>framed / dormant identity</b> (Rourke).</li></ul></div>
+    <div class="box"><b class="tiny">TEST TO APPLY</b><p class="small" style="margin:3px 0 0;">Only <b>one</b> person of interest can satisfy the <i>complete</i> chain: motive + physical presence at the registration host + the account‑switch + benefit + the deleted cover‑up. Capability, motive, or a single log alone is <b>not</b> sufficient. Build the chain on Page 20.</p></div>
+  </div>
+  <div class="foot"><span class="pg">PAGE 17 / 22</span><span>PERSONS OF INTEREST</span><span>E‑048 · 5 listed</span></div>
+</section>
+
+<!-- ============================================================ PAGE 18 — PHYSICAL / OFFICE EVIDENCE -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">PHYSICAL EVIDENCE</div></div>
+  <div class="classband">EVIDENCE — PHYSICAL / OFFICE<span>DOC E‑054 → E‑058</span></div>
+  <div class="dochead">
+    <div class="doctype">ACCESS + CCTV + PHOTOS<br>Denver Floor‑3<br>Collected 04 JUN 2025</div>
+    <div class="unit">Access‑card logs, CCTV references and evidence photographs</div>
+    <h1>Physical / Office Evidence</h1>
+    <div class="sub">Ties digital events to a physical presence.</div>
+  </div>
+
+  <h3 class="sub" style="margin-top:2px;">A. Denver Floor‑3 badge‑in log — 30 May 2025 (E‑054)</h3>
+  <table class="logtable">
+    <tr><th>Time (CT)</th><th>Badge / person</th><th>Reader</th><th>Direction</th></tr>
+    <tr><td>15:19</td><td>VMT‑4610 · S. Vinter</td><td>DEN‑F3‑MAIN</td><td>IN</td></tr>
+    <tr><td>15:20</td><td>VMT‑4610 · S. Vinter</td><td>DEN‑F3‑WKRM (shared workstation room)</td><td>IN</td></tr>
+    <tr><td>16:38</td><td>VMT‑4610 · S. Vinter</td><td>DEN‑F3‑WKRM</td><td>OUT</td></tr>
+    <tr><td>—</td><td>D. Rourke (CTR‑BG‑077)</td><td>—</td><td>no badge activity (offboarded)</td></tr>
+    <tr><td>—</td><td>M. Feld / T. Blaine / K. Malhotra</td><td>Austin HQ readers only</td><td>not in Denver</td></tr>
+  </table>
+  <p class="tiny" style="margin:3px 0;">The workstation room (DEN‑F3‑WKRM) houses VMT‑WS‑DEN‑02. Only one badge entered that room during 15:20–16:38 on 30 May. <span class="evtag red">E‑054</span></p>
+
+  <div class="two" style="margin-top:6px;">
+    <div class="box"><b class="tiny">CCTV REFERENCE (E‑055)</b><p class="small" style="margin:3px 0 0;">Camera DEN‑CAM‑07 (workstation room) recording 30 May. Frame index 15:33 and 15:47 flagged for review — single occupant at VMT‑WS‑DEN‑02. Full footage sealed. See photo tile below.</p></div>
+    <div class="box"><b class="tiny">DEVICE SEIZURE (E‑056)</b><p class="small" style="margin:3px 0 0;">VMT‑WS‑DEN‑02 imaged on‑site 04 Jun (matches Page 14). Chain of custody CoC‑DEN‑02 signed by facilities &amp; investigator.</p></div>
+  </div>
+
+  <h3 class="sub">B. Evidence photograph sheet</h3>
+  <div class="three" style="gap:6px;">
+    <div><div class="ph" style="height:30mm;">[PHOTO: CCTV FRAME]</div><div class="tiny" style="text-align:center;">DEN‑CAM‑07 · 15:47 · E‑055</div></div>
+    <div><div class="ph" style="height:30mm;">[PHOTO: ACCESS CARD]</div><div class="tiny" style="text-align:center;">Badge VMT‑4610 · E‑054</div></div>
+    <div><div class="ph" style="height:30mm;">[PHOTO: SCREENSHOT]</div><div class="tiny" style="text-align:center;">App‑reg portal · E‑057</div></div>
+    <div><div class="ph" style="height:30mm;">[PHOTO: LAPTOP]</div><div class="tiny" style="text-align:center;">VMT‑WS‑DEN‑02 · E‑056</div></div>
+    <div><div class="ph" style="height:30mm;">[PHOTO: OFFICE]</div><div class="tiny" style="text-align:center;">Denver Floor‑3 · E‑058</div></div>
+    <div><div class="ph" style="height:30mm;">[PHOTO: SERVER ROOM]</div><div class="tiny" style="text-align:center;">HQ ref only · E‑058</div></div>
+  </div>
+
+  <div class="flag"><b>INVESTIGATOR PROMPT:</b> The digital session that registered the app came from VMT‑WS‑DEN‑02 (Pages 14–15). The badge log (E‑054) shows exactly one person in that room during the window. CCTV (E‑055) can confirm identity. This is the physical corroboration for the shared‑machine account switch. <span class="evtag red">E‑054 · E‑055</span></div>
+  <div class="foot"><span class="pg">PAGE 18 / 22</span><span>PHYSICAL / OFFICE EVIDENCE</span><span>E‑054 – E‑058</span></div>
+</section>
+
+<!-- ============================================================ PAGE 19 — INVESTIGATOR TIMELINE -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">RECONSTRUCTED TIMELINE</div></div>
+  <div class="classband dark">RESTRICTED — WORKING TIMELINE<span>DOC E‑059</span></div>
+  <div class="dochead">
+    <div class="doctype">WORKING RECONSTRUCTION<br>30 MAY → 04 JUN 2025<br>Gaps deliberately left</div>
+    <div class="unit">Player‑facing reconstruction — incomplete</div>
+    <h1>Investigator Timeline</h1>
+    <div class="sub">Some cells are blank. Fill them from the evidence.</div>
+  </div>
+  <table class="logtable" style="font-size:7.1pt;">
+    <tr><th style="width:14%">Date / time</th><th style="width:14%">Actor</th><th style="width:14%">Device / IP</th><th style="width:16%">Application</th><th>Event</th><th style="width:9%">Evid.</th></tr>
+    <tr><td>05‑30 12:31</td><td>S. Vinter ↔ ext.</td><td>—</td><td>—</td><td>DM: &ldquo;notes connector route… tool everyone uses&rdquo; (later deleted)</td><td>E‑025</td></tr>
+    <tr><td>05‑30 15:19</td><td>________</td><td>Badge VMT‑4610</td><td>—</td><td>Enters Denver Floor‑3 workstation room</td><td>E‑054</td></tr>
+    <tr><td>05‑30 15:33</td><td>s.vinter</td><td>VMT‑WS‑DEN‑02</td><td>app‑registrations</td><td>Opens app‑registration portal</td><td>E‑031</td></tr>
+    <tr><td>05‑30 15:41</td><td>s.vinter → ______</td><td>VMT‑WS‑DEN‑02</td><td>—</td><td>Account switch to saved d.rourke creds</td><td>E‑031</td></tr>
+    <tr><td>05‑30 15:47</td><td>d.rourke (acct)</td><td>203.0.113.44</td><td>Cadence Sync Connector</td><td>Malicious app <b>registered</b>; redirect → cadence‑sync‑app.example</td><td>E‑007</td></tr>
+    <tr><td>05‑30 15:52</td><td>&ldquo;Cadence Notes&rdquo;</td><td>203.0.113.44</td><td>—</td><td>&ldquo;Reconnect&rdquo; mail sent to Okafor (SPF softfail)</td><td>E‑021</td></tr>
+    <tr><td>05‑30 16:12</td><td>N. Okafor</td><td>VMT‑LT‑4471</td><td>________________</td><td>Consents + MFA; refresh (offline) token issued</td><td>E‑005/8</td></tr>
+    <tr><td>05‑30 16:31</td><td>s.vinter</td><td>VMT‑WS‑DEN‑02</td><td>—</td><td>Browser history cleared (partial)</td><td>E‑031</td></tr>
+    <tr><td>05‑31 02:41–03:59</td><td>__________ (app)</td><td>198.51.100.23</td><td>Cadence Sync Connector</td><td>186 Lighthouse files pulled via refresh token</td><td>E‑013</td></tr>
+    <tr><td>06‑01 01:10–01:52</td><td>(app)</td><td>198.51.100.23</td><td>Cadence Sync Connector</td><td>28 files + 41 mail items pulled</td><td>E‑14/15</td></tr>
+    <tr><td>06‑02 morning</td><td>Corp‑Dev</td><td>—</td><td>—</td><td>Files spotted externally → discovery</td><td>E‑038</td></tr>
+    <tr><td>06‑02 09:14</td><td>S. Vinter</td><td>—</td><td>—</td><td>DMs deleted from chat client</td><td>E‑025</td></tr>
+    <tr><td>06‑02 later</td><td>P. Anand / M. Feld</td><td>SIEM</td><td>—</td><td>Anomalous token refresh flagged &amp; escalated</td><td>E‑045</td></tr>
+    <tr><td>06‑03</td><td>A. Delgado</td><td>—</td><td>—</td><td>Complaint filed → CDF‑002 opened</td><td>E‑001</td></tr>
+    <tr><td>06‑04</td><td>Insp. Whitfield</td><td>—</td><td>—</td><td>Endpoint/badge/CCTV seized at Denver</td><td>E‑054/56</td></tr>
+  </table>
+  <div class="flag"><b>GAPS TO CLOSE:</b> Fill each blank (______) using corroborating records. The identity of the person at 15:19, the target of the 15:41 switch, the app named at 16:12, and the actor behind the 31 May pulls are all resolvable from at least three sources. Do <b>not</b> guess. <span class="evtag">E‑059</span></div>
+  <div class="foot"><span class="pg">PAGE 19 / 22</span><span>INVESTIGATOR TIMELINE</span><span>E‑059 · working copy</span></div>
+</section>
+
+<!-- ============================================================ PAGE 20 — EVIDENCE CORRELATION WORKSHEET -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">CORRELATION WORKSHEET</div></div>
+  <div class="classband">INVESTIGATOR WORKSHEET<span>WKS‑CDF‑002</span></div>
+  <div class="dochead">
+    <div class="doctype">FILL‑IN WORKSHEET<br>For handwritten use<br>Rule of three applies</div>
+    <div class="unit">Correlate evidence — build each conclusion from ≥3 sources</div>
+    <h1>Evidence Correlation Worksheet</h1>
+    <div class="sub">Write your reasoning. Cite evidence IDs in every box.</div>
+  </div>
+
+  <style>
+    .wq{border:1px solid var(--ink);margin:6px 0;}
+    .wq .q{background:#eef1f5;padding:4px 8px;font-size:8.4pt;font-weight:bold;color:var(--ink);}
+    .wl{height:9mm;border-bottom:1px dashed #b9b9b9;margin:0 8px;}
+    .three-src{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:6px 8px;}
+    .three-src .s{border:1px dashed #b9b9b9;height:13mm;font-size:6.8pt;color:var(--muted);padding:2px 4px;}
+  </style>
+
+  <div class="wq">
+    <div class="q">Q1. Which application actually accessed the data — and is it the same app the user has used since April?</div>
+    <div class="three-src"><div class="s">Source A (ID): ____</div><div class="s">Source B (ID): ____</div><div class="s">Source C (ID): ____</div></div>
+    <div class="wl"></div><div class="wl"></div>
+  </div>
+  <div class="wq">
+    <div class="q">Q2. Was Okafor's account compromised, or authorized? What proves file access was application activity while she was offline?</div>
+    <div class="three-src"><div class="s">Source A (ID): ____</div><div class="s">Source B (ID): ____</div><div class="s">Source C (ID): ____</div></div>
+    <div class="wl"></div><div class="wl"></div>
+  </div>
+  <div class="wq">
+    <div class="q">Q3. Who physically registered the app? Tie the registration host to a person.</div>
+    <div class="three-src"><div class="s">Source A (ID): ____</div><div class="s">Source B (ID): ____</div><div class="s">Source C (ID): ____</div></div>
+    <div class="wl"></div><div class="wl"></div>
+  </div>
+  <div class="wq">
+    <div class="q">Q4. Why is each of the other four persons of interest eliminated? (one line each, with an ID)</div>
+    <div class="wl"></div><div class="wl"></div>
+  </div>
+  <div class="box" style="margin-top:6px;">
+    <b class="tiny">RED HERRINGS — LOG YOUR EXPLANATION</b>
+    <table class="datatable" style="font-size:7.4pt;margin-top:3px;">
+      <tr><th>Red herring</th><th>Your explanation</th><th style="width:14%">Evid.</th></tr>
+      <tr><td>Feld's admin power</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>Blaine's heavy downloads</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>Malhotra vendor tie</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>Rourke as registrant</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>Bennett VPN / Grange cloud / Park keys</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    </table>
+  </div>
+  <div class="note" style="margin-top:6px;">Investigator scratch: ________________________________________________<br>________________________________________________________________</div>
+  <div class="foot"><span class="pg">PAGE 20 / 22</span><span>EVIDENCE CORRELATION WORKSHEET</span><span>WKS‑CDF‑002</span></div>
+</section>
+
+<!-- ============================================================ PAGE 21 — PENDING QUESTIONS -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">PENDING QUESTIONS</div></div>
+  <div class="classband">RESTRICTED — OPEN QUESTIONS<span>DOC E‑060</span></div>
+  <div class="dochead">
+    <div class="doctype">OPEN LINES OF INQUIRY<br>To be answered by<br>the investigator</div>
+    <div class="unit">Questions the investigation must still resolve</div>
+    <h1>Pending Investigation Questions</h1>
+    <div class="sub">The case does not close until these are answered from evidence.</div>
+  </div>
+
+  <div class="two">
+    <div class="box hd">
+      <b class="tiny" style="color:var(--ink);">IDENTITY &amp; AUTHORIZATION</b>
+      <ul class="tight">
+        <li>Who authorized the application, and which application was it?</li>
+        <li>Was the authorization <i>intentional</i> and <i>informed</i>?</li>
+        <li>Was Okafor's account actually compromised, or used as designed?</li>
+        <li>Which token accessed the data — and did it carry offline access?</li>
+        <li>Which application requested the sensitive scope, and who published it?</li>
+      </ul>
+    </div>
+    <div class="box hd">
+      <b class="tiny" style="color:var(--ink);">PEOPLE &amp; VENDORS</b>
+      <ul class="tight">
+        <li>Who physically sat at the registration host?</li>
+        <li>Why does a dormant contractor account appear as registrant?</li>
+        <li>Did any vendor contribute, or was a vendor identity misused?</li>
+        <li>Who deleted the messages in E‑025, and why?</li>
+        <li>Who ultimately benefits from the leaked deal data?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box" style="margin-top:8px;">
+    <b class="tiny">EVIDENCE STILL UNDER EXAMINATION</b>
+    <table class="datatable" style="font-size:7.6pt;margin-top:3px;">
+      <tr><th style="width:20%">Item</th><th>Awaiting</th><th style="width:20%">Priority</th></tr>
+      <tr><td>E‑055 CCTV</td><td>Full facial confirmation of workstation occupant</td><td>High</td></tr>
+      <tr><td>E‑053 finance</td><td>Confirmation of a person‑of‑interest's financial pressure</td><td>High</td></tr>
+      <tr><td>cadence‑sync‑app.example</td><td>Attribution of external endpoint 198.51.100.23</td><td>Medium</td></tr>
+      <tr><td>E‑025 external handle</td><td>Identification of the external chat party</td><td>Medium</td></tr>
+    </table>
+  </div>
+
+  <div class="flag"><b>DISCIPLINE REMINDER:</b> A single strong clue (the deleted DM, the badge log, the client‑ID mismatch) is <b>suggestive, not conclusive</b>. Attribution requires the full chain: motive + presence + action + benefit + cover‑up, each backed by independent evidence. Record your answers on Page 20 and in your own notes.</div>
+
+  <div class="box" style="margin-top:8px;text-align:center;border-top:3px solid var(--red);">
+    <b style="font-size:9pt;color:var(--red);">DO NOT RECORD A CONCLUSION UNTIL EVERY QUESTION ABOVE IS SUPPORTED BY AT LEAST THREE INDEPENDENT SOURCES.</b>
+  </div>
+  <div class="foot"><span class="pg">PAGE 21 / 22</span><span>PENDING INVESTIGATION QUESTIONS</span><span>E‑060 · CDF‑002</span></div>
+</section>
+
+<!-- ============================================================ PAGE 22 — CURRENT STATUS -->
+<section class="page">
+  <div class="rail"><div class="cdf">CDF‑002</div><div class="perf"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="vtxt">INVESTIGATION STATUS</div></div>
+  <div class="classband dark">RESTRICTED — STATUS REPORT<span>DOC E‑061</span></div>
+  <div class="dochead">
+    <div class="doctype">STATUS AS OF<br>04 JUN 2025 · 18:00<br>Insp. D. Whitfield</div>
+    <div class="unit">Current standing of the inquiry</div>
+    <h1>Current Investigation Status</h1>
+    <div class="sub">The file remains open pending correlation by the investigator.</div>
+  </div>
+
+  <div style="text-align:center;margin:6mm 0;">
+    <div style="display:inline-block;border:4px double var(--red);color:var(--red);font-family:'Arial Narrow',Arial;font-weight:bold;letter-spacing:6px;font-size:26pt;padding:8px 26px;transform:rotate(-3deg);">INVESTIGATION&nbsp;ACTIVE</div>
+    <div style="margin-top:6px;font-size:9pt;letter-spacing:3px;color:var(--ink);font-weight:bold;">STATUS: OPEN — INVESTIGATION CONTINUES</div>
+  </div>
+
+  <div class="two">
+    <div class="box"><b class="tiny">ESTABLISHED SO FAR (corroborated)</b><ul class="tight">
+      <li>Access occurred via an application authorization, not a password breach.</li>
+      <li>A lookalike, unverified app with broad + offline scope holds a live grant.</li>
+      <li>Bulk file access was application activity while the user was offline.</li>
+      <li>The genuine vendor disavows the lookalike app.</li>
+    </ul></div>
+    <div class="box"><b class="tiny">NOT YET ESTABLISHED (open)</b><ul class="tight">
+      <li>Final attribution of the person who registered &amp; controlled the app.</li>
+      <li>Whether the affected employee acted knowingly.</li>
+      <li>Attribution of the external endpoint and chat party.</li>
+      <li>The full motive and ultimate beneficiary.</li>
+    </ul></div>
+  </div>
+
+  <div class="box" style="margin-top:8px;">
+    <b class="tiny">NEXT STEPS ON FILE</b>
+    <ul class="tight">
+      <li>Complete the correlation worksheet (Page 20) and close every timeline gap (Page 19).</li>
+      <li>Confirm workstation occupant via CCTV (E‑055) and badge log (E‑054).</li>
+      <li>Answer all pending questions (Page 21) with ≥3 corroborating sources each.</li>
+      <li>Only then compare your findings against the SEALED SOLUTION envelope.</li>
+    </ul>
+  </div>
+
+  <div class="flag"><b>TO THE INVESTIGATOR:</b> You now hold every record needed to resolve OPERATION GHOST GRANT. Separate authentication from authorization; separate user activity from application activity; build each conclusion from at least three independent sources; and explain every red herring. When your chain is complete, and only then, open the sealed solution.</div>
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:8mm;">
+    <div class="sig"><div class="sigline">[OFFICER SIGNATURE — DISHANT SUTHAR]</div>Insp. Dishant Suthar · CCIU‑DF‑114</div>
+    <div class="ph" style="width:34mm;height:20mm;">[CASE SEAL]</div>
+  </div>
+  <div class="foot"><span class="pg">PAGE 22 / 22</span><span>CURRENT INVESTIGATION STATUS — OPEN</span><span>E‑061 · CDF‑002</span></div>
+</section>
+
+</body>
+</html>

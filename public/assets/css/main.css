@@ -1,0 +1,567 @@
+/* ==========================================================================
+   CYBER DETECTIVE FILES — CASE PORTAL
+   Design system: "Investigator's Desk" — a dark, physical evidence-room
+   built around the same tokens as the printable case files themselves.
+
+   TOKEN SYSTEM
+   Color:
+     --desk        #15130E  the dark tabletop everything sits on
+     --panel       #201C14  raised panels / cork-board fill
+     --manila      #C9AF7D  folder stock, primary surface accent
+     --paper       #EEEAE0  report paper
+     --ink         #1C1A17  text on paper surfaces
+     --stamp-red   #9E2B25  alerts, locked states, "wanted" marks
+     --custody-blue#3C5A78  official / verified / links
+     --sticky      #F0D563  rank, points, active highlights
+     --thread      #B5432E  red string between related items
+   Type:
+     display -> 'Special Elite' (typewriter, case stamps, headings)
+     body    -> 'Courier Prime' (report copy, the portal's own voice)
+     hand    -> 'Caveat' (annotations, testimonials, margin notes)
+     data    -> 'JetBrains Mono' (points, ranks, timestamps, logs)
+   Layout: a corkboard/desk metaphor — cards read as folders and index
+     cards pinned to a board, not SaaS panels.
+   Signature element: the rubber-stamp button + red-string "linked case"
+     connectors + torn-corner folder tab used across cards and nav.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root{
+  --desk: #15130E;
+  --desk-2: #100E0A;
+  --panel: #201C14;
+  --panel-2: #29241A;
+  --manila: #C9AF7D;
+  --manila-dark: #A88F5C;
+  --paper: #EEEAE0;
+  --paper-dim: #E3DCC6;
+  --ink: #1C1A17;
+  --ink-soft: #4A4436;
+  --stamp-red: #9E2B25;
+  --stamp-red-light: #C1443C;
+  --custody-blue: #5C86AC;
+  --sticky: #F0D563;
+  --thread: #B5432E;
+  --text: #EDE6D4;
+  --text-dim: rgba(237,230,212,.62);
+  --text-faint: rgba(237,230,212,.38);
+  --line: rgba(237,230,212,.12);
+
+  --font-display: 'Special Elite', 'Courier New', monospace;
+  --font-body: 'Courier Prime', 'Courier New', monospace;
+  --font-hand: 'Caveat', cursive;
+  --font-data: 'JetBrains Mono', 'Courier New', monospace;
+
+  --radius: 2px;
+}
+
+*{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin:0;
+  background: var(--desk);
+  background-image:
+    radial-gradient(ellipse at 20% -10%, rgba(240,213,99,.05), transparent 45%),
+    radial-gradient(ellipse at 90% 10%, rgba(92,134,172,.05), transparent 40%);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection{ background: var(--sticky); color: var(--ink); }
+
+a{ color: var(--custody-blue); text-decoration: none; }
+a:hover{ color: var(--sticky); }
+
+h1,h2,h3,h4{
+  font-family: var(--font-display);
+  letter-spacing: .01em;
+  color: var(--paper);
+  line-height: 1.25;
+}
+
+.text-data, .stat-num, .badge-pts, .nav-id{ font-family: var(--font-data); }
+.text-hand{ font-family: var(--font-hand); }
+
+.eyebrow{
+  font-family: var(--font-data);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--sticky);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  html{ scroll-behavior: auto; }
+}
+
+/* Focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+  outline: 2px solid var(--sticky);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------
+   NAVBAR — reads as a row of hanging folder tabs along the top edge
+-------------------------------------------------------------------- */
+.cdfu-nav{
+  background: linear-gradient(180deg, var(--desk-2), var(--desk) 90%);
+  border-bottom: 1px solid var(--line);
+  padding: 0 1.25rem;
+}
+.cdfu-nav .navbar-brand{
+  font-family: var(--font-display);
+  color: var(--paper);
+  font-size: 1.05rem;
+  letter-spacing: .04em;
+  display:flex; align-items:center; gap:.6rem;
+}
+.cdfu-nav .navbar-brand .brand-mark{
+  width: 30px; height: 30px;
+  background: var(--stamp-red);
+  color: var(--paper);
+  display:flex; align-items:center; justify-content:center;
+  font-size: 13px;
+  border-radius: 50%;
+  transform: rotate(-8deg);
+  border: 2px solid rgba(238,234,224,.35);
+}
+.cdfu-nav .nav-link{
+  font-family: var(--font-data);
+  font-size: 12.5px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text-dim) !important;
+  padding: 1.1rem .9rem !important;
+  position: relative;
+  border-bottom: 2px solid transparent;
+}
+.cdfu-nav .nav-link:hover,
+.cdfu-nav .nav-link.active{
+  color: var(--sticky) !important;
+  border-bottom-color: var(--sticky);
+}
+.cdfu-nav .navbar-toggler{ border-color: var(--line); }
+.cdfu-nav .navbar-toggler-icon{
+  filter: invert(1) grayscale(1);
+}
+
+.nav-id-pill{
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  padding: .35rem .7rem;
+  border-radius: 999px;
+  display:flex; align-items:center; gap:.5rem;
+}
+.nav-id-pill .rank-dot{
+  width:7px; height:7px; border-radius:50%; background: var(--sticky);
+}
+
+/* --------------------------------------------------------------------
+   BUTTONS — rubber-stamp affordance
+-------------------------------------------------------------------- */
+.btn-stamp{
+  font-family: var(--font-display);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-size: 13px;
+  background: transparent;
+  border: 2px solid var(--stamp-red-light);
+  color: var(--stamp-red-light);
+  padding: .65rem 1.4rem;
+  border-radius: var(--radius);
+  transition: transform .15s ease, background .15s ease, color .15s ease;
+  display:inline-block;
+}
+.btn-stamp:hover{
+  background: var(--stamp-red-light);
+  color: var(--paper);
+  transform: rotate(-1.5deg) scale(1.02);
+}
+.btn-stamp-gold{
+  border-color: var(--sticky);
+  color: var(--sticky);
+}
+.btn-stamp-gold:hover{ background: var(--sticky); color: var(--ink); }
+
+.btn-file{
+  font-family: var(--font-data);
+  font-size: 12.5px;
+  letter-spacing: .03em;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: .55rem 1.1rem;
+  border-radius: var(--radius);
+}
+.btn-file:hover{ border-color: var(--sticky); color: var(--sticky); background: var(--panel-2); }
+
+/* --------------------------------------------------------------------
+   HERO
+-------------------------------------------------------------------- */
+.hero{
+  padding: 6.5rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.015) 0 1px, transparent 1px 3px);
+  pointer-events:none;
+}
+.hero .folder-tag{
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-family: var(--font-data);
+  font-size: 11.5px;
+  letter-spacing:.1em;
+  text-transform: uppercase;
+  color: var(--sticky);
+  border: 1px dashed rgba(240,213,99,.4);
+  padding: .35rem .8rem;
+  margin-bottom: 1.5rem;
+}
+.hero h1{
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+  max-width: 14ch;
+}
+.hero .lede{
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  max-width: 46ch;
+  margin: 1.1rem 0 2rem;
+}
+.hero-stats{
+  display:flex; gap: 2.4rem; margin-top: 2.75rem; flex-wrap: wrap;
+}
+.hero-stats .stat-num{
+  font-size: 1.9rem; color: var(--sticky); font-weight: 700;
+}
+.hero-stats .stat-label{
+  font-family: var(--font-data); font-size: 10.5px; letter-spacing:.08em;
+  text-transform:uppercase; color: var(--text-faint);
+}
+
+/* Case-board mini visual in hero */
+.board-card{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 1.4rem;
+  position: relative;
+}
+.board-card::after{
+  content:"CASE 001";
+  position:absolute; top:-10px; left:20px;
+  background: var(--stamp-red);
+  color: var(--paper);
+  font-family: var(--font-data);
+  font-size: 10px;
+  letter-spacing:.08em;
+  padding: 3px 9px;
+  transform: rotate(-2deg);
+}
+.board-row{
+  display:flex; justify-content:space-between; align-items:center;
+  padding: .55rem 0; border-bottom: 1px dashed var(--line);
+  font-size: 13px;
+}
+.board-row:last-child{ border-bottom:none; }
+.board-row .k{ color: var(--text-faint); font-family: var(--font-data); font-size: 10.5px; text-transform:uppercase; letter-spacing:.06em; }
+.board-row .v{ color: var(--paper); }
+
+/* --------------------------------------------------------------------
+   SECTION HEADERS
+-------------------------------------------------------------------- */
+.section{ padding: 4.5rem 0; }
+.section-head{ margin-bottom: 2.4rem; }
+.section-head h2{ font-size: 1.7rem; margin: .35rem 0 .5rem; }
+.section-head p{ color: var(--text-dim); max-width: 56ch; }
+
+/* --------------------------------------------------------------------
+   CASE FOLDER CARD
+-------------------------------------------------------------------- */
+.folder-card{
+  background: var(--manila);
+  color: var(--ink);
+  position: relative;
+  border-radius: var(--radius);
+  padding: 1.4rem 1.4rem 1.2rem;
+  height: 100%;
+  display:flex; flex-direction:column;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35);
+  transition: transform .18s ease, box-shadow .18s ease;
+  border-top: 14px solid var(--manila-dark);
+}
+.folder-card:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 16px 32px rgba(0,0,0,.45);
+}
+.folder-card .tab{
+  position:absolute; top:-14px; left: 1.4rem;
+  background: var(--manila-dark);
+  color: var(--ink);
+  font-family: var(--font-data);
+  font-size: 10.5px;
+  letter-spacing:.06em;
+  padding: 3px 10px 5px;
+  border-radius: 3px 3px 0 0;
+}
+.folder-card .case-code{
+  font-family: var(--font-data);
+  font-size: 10.5px;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing:.05em;
+}
+.folder-card h3{
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-size: 1.15rem;
+  margin: .3rem 0 .55rem;
+}
+.folder-card p.desc{
+  font-size: 13px;
+  color: var(--ink-soft);
+  flex-grow: 1;
+}
+.folder-card .meta-row{
+  display:flex; flex-wrap:wrap; gap:.4rem;
+  margin: .7rem 0 1rem;
+}
+.chip{
+  font-family: var(--font-data);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(28,26,23,.25);
+  color: var(--ink-soft);
+}
+.chip.diff-rookie{ background: rgba(92,134,172,.18); border-color: var(--custody-blue); color:#2c3e50; }
+.chip.diff-field{ background: rgba(240,213,99,.35); border-color:#8a6d1f; color:#5c4813; }
+.chip.diff-veteran{ background: rgba(158,43,37,.16); border-color: var(--stamp-red); color: var(--stamp-red); }
+.chip.points{ background: rgba(28,26,23,.08); }
+
+.folder-card.locked{
+  filter: grayscale(.55);
+  opacity: .72;
+}
+.folder-card.locked::before{
+  content:"COMING SOON";
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background: rgba(20,18,13,.4);
+  color: var(--paper);
+  font-family: var(--font-display);
+  letter-spacing: .1em;
+  font-size: .95rem;
+  transform: rotate(-6deg);
+}
+
+.progress-track{
+  height: 6px; background: rgba(28,26,23,.15); border-radius: 999px; overflow:hidden;
+}
+.progress-fill{ height:100%; background: var(--stamp-red); }
+
+/* Dark variant folder used inside dashboards */
+.folder-card.dark{
+  background: var(--panel);
+  color: var(--text);
+  border-top: 14px solid var(--panel-2);
+  box-shadow: none;
+  border: 1px solid var(--line);
+  border-top-width: 14px;
+}
+.folder-card.dark .tab{ background: var(--panel-2); color: var(--sticky); }
+.folder-card.dark h3{ color: var(--paper); }
+.folder-card.dark p.desc{ color: var(--text-dim); }
+.folder-card.dark .case-code{ color: var(--text-faint); }
+
+/* --------------------------------------------------------------------
+   PAPER PANEL — generic light "document" surface for auth/quiz forms
+-------------------------------------------------------------------- */
+.paper-panel{
+  background: var(--paper);
+  color: var(--ink);
+  padding: 2.2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 16px 40px rgba(0,0,0,.4);
+}
+.paper-panel label{
+  font-family: var(--font-data);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--ink-soft);
+  margin-bottom: .3rem;
+  display:block;
+}
+.paper-panel .form-control{
+  background: #fff;
+  border: 1px solid rgba(28,26,23,.25);
+  border-radius: 2px;
+  font-family: var(--font-body);
+  color: var(--ink);
+  padding: .6rem .8rem;
+}
+.paper-panel .form-control:focus{
+  box-shadow: none;
+  border-color: var(--stamp-red);
+}
+
+/* --------------------------------------------------------------------
+   PANEL (dark card) used broadly
+-------------------------------------------------------------------- */
+.panel{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+}
+
+/* --------------------------------------------------------------------
+   RANK BADGE / EVIDENCE STAMP
+-------------------------------------------------------------------- */
+.rank-badge{
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-family: var(--font-data);
+  padding: .5rem .9rem;
+  border: 1px solid var(--sticky);
+  color: var(--sticky);
+  border-radius: 999px;
+  font-size: 12px;
+  letter-spacing:.04em;
+}
+
+.stamp-badge{
+  width: 92px; height: 92px;
+  border-radius: 50%;
+  border: 3px solid var(--stamp-red-light);
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  color: var(--stamp-red-light);
+  margin: 0 auto .7rem;
+  transform: rotate(-6deg);
+  padding: .5rem;
+  line-height:1.25;
+  background: rgba(158,43,37,.06);
+}
+.badge-tile{ text-align:center; padding: 1.4rem 1rem; }
+.badge-tile.locked .stamp-badge{
+  border-color: var(--line); color: var(--text-faint); background: transparent;
+}
+.badge-tile .b-name{ font-family: var(--font-display); font-size: .92rem; color: var(--paper); }
+.badge-tile.locked .b-name{ color: var(--text-faint); }
+.badge-tile .b-desc{ font-size: 12px; color: var(--text-dim); margin-top:.2rem; }
+
+/* --------------------------------------------------------------------
+   LEADERBOARD TABLE
+-------------------------------------------------------------------- */
+.lb-table{ width:100%; border-collapse: collapse; }
+.lb-table th{
+  font-family: var(--font-data);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing:.06em;
+  color: var(--text-faint);
+  text-align:left;
+  padding: .8rem .9rem;
+  border-bottom: 1px solid var(--line);
+}
+.lb-table td{
+  padding: .85rem .9rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+.lb-table tr.me{ background: rgba(240,213,99,.07); }
+.lb-rank-num{ font-family: var(--font-data); color: var(--sticky); width: 2rem; display:inline-block; }
+.lb-table tr:hover td{ background: rgba(255,255,255,.02); }
+
+/* --------------------------------------------------------------------
+   QUIZ
+-------------------------------------------------------------------- */
+.quiz-q{
+  border: 1px solid rgba(28,26,23,.15);
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 1rem;
+  border-radius: 2px;
+  background: rgba(255,255,255,.35);
+}
+.quiz-q .q-num{
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--stamp-red);
+  text-transform: uppercase;
+}
+.quiz-q .form-check-label{ font-size: 14px; }
+.quiz-result{
+  border-left: 4px solid var(--stamp-red);
+  background: rgba(158,43,37,.06);
+  padding: 1rem 1.2rem;
+}
+.quiz-result.pass{ border-left-color: #2f7d4f; background: rgba(47,125,79,.08); }
+
+/* --------------------------------------------------------------------
+   READER (case-file viewer chrome)
+-------------------------------------------------------------------- */
+.reader-shell{ background: #5c564a; min-height: 100vh; }
+.reader-topbar{
+  background: var(--desk-2);
+  border-bottom: 1px solid var(--line);
+  padding: .7rem 1rem;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+}
+.reader-topbar .title{ font-family: var(--font-data); font-size: 12.5px; color: var(--text-dim); }
+.reader-frame-wrap{ padding: 1.4rem 0; }
+.reader-frame{
+  width: 100%; height: 82vh; border: none; background: #5c564a;
+  display:block; margin: 0 auto; max-width: 900px;
+}
+.reader-nav-list{ max-height: 82vh; overflow-y:auto; }
+.reader-nav-list a{
+  display:flex; justify-content:space-between; gap:.5rem;
+  padding: .55rem .7rem;
+  font-family: var(--font-data);
+  font-size: 11.5px;
+  color: var(--text-dim);
+  border-left: 2px solid transparent;
+}
+.reader-nav-list a.active{ color: var(--sticky); border-left-color: var(--sticky); background: rgba(240,213,99,.06); }
+.reader-nav-list a:hover{ color: var(--sticky); }
+
+/* --------------------------------------------------------------------
+   FOOTER
+-------------------------------------------------------------------- */
+.cdfu-footer{
+  border-top: 1px solid var(--line);
+  padding: 2.5rem 0;
+  color: var(--text-faint);
+  font-size: 13px;
+}
+.cdfu-footer a{ color: var(--text-dim); }
+
+/* Utility */
+.text-sticky{ color: var(--sticky); }
+.text-dim{ color: var(--text-dim); }
+.text-faint{ color: var(--text-faint); }
+.divider-dash{ border-top: 1px dashed var(--line); margin: 2rem 0; }
+
+@media (max-width: 767px){
+  .hero{ padding: 4rem 0 3rem; }
+  .section{ padding: 3rem 0; }
+  .reader-frame{ height: 70vh; }
+}

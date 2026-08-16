@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Page 06 — Identity Documents</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .id-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 8mm; margin-top:6mm; }
+  .id-card{ border:1.5px solid var(--ink); padding:4mm; background:#f6f3ea; position:relative; }
+  .id-card .role{ font-family:var(--font-data); font-size:8px; text-transform:uppercase; color:var(--ink-soft); }
+  .id-card .name{ font-family:var(--font-display); font-size:15px; margin:1mm 0; }
+  .id-photo{ width:20mm; height:24mm; background:#333; float:left; margin-right:3mm; }
+  .payroll{ border:1px solid var(--ink); padding:4mm; font-family:var(--font-data); font-size:9px; }
+  .payroll table{ width:100%; border-collapse:collapse; margin-top:2mm; }
+  .payroll td{ padding:1mm 0; border-bottom:1px dotted var(--line); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-content">
+    <div class="evidence-header">
+      <div class="block">
+        <div class="case-title">IDENTITY &amp; PERSONNEL DOCUMENTS</div>
+        <div>Recovered from HR / Contractor records</div>
+      </div>
+      <div class="block" style="text-align:right;">
+        <div class="label">Evidence No.</div>
+        <div class="value">CDF-001-BL-006</div>
+      </div>
+    </div>
+
+    <div class="id-grid">
+      <div class="id-card">
+        <div class="id-photo"></div>
+        <div class="role">Solvex Analytics — Contractor Badge</div>
+        <div class="name">Vikram Rao</div>
+        <div style="font-size:10px;">Age 29 &nbsp;•&nbsp; Freelance IT Support (Remote)</div>
+        <div style="font-size:9px; margin-top:1mm; clear:both;">Access Level: VPN Remote Only &nbsp;|&nbsp; Building Access: <strong>NOT ISSUED</strong></div>
+        <div class="tag" style="margin-top:2mm;">Remote / Contractor</div>
+      </div>
+
+      <div class="id-card">
+        <div class="id-photo"></div>
+        <div class="role">Solvex Analytics — Employee ID</div>
+        <div class="name">Devraj Solanki</div>
+        <div style="font-size:10px;">Age 37 &nbsp;•&nbsp; Senior Sales Manager</div>
+        <div style="font-size:9px; margin-top:1mm; clear:both;">Department: Sales &nbsp;|&nbsp; Building Access: Full</div>
+        <div class="tag" style="margin-top:2mm;">Full-Time Employee</div>
+      </div>
+
+      <div class="id-card">
+        <div class="id-photo"></div>
+        <div class="role">Solvex Analytics — Employee ID</div>
+        <div class="name">Ananya Kapoor</div>
+        <div style="font-size:10px;">Age 34 &nbsp;•&nbsp; Sr. Finance Executive</div>
+        <div style="font-size:9px; margin-top:1mm; clear:both;">Department: Finance &nbsp;|&nbsp; Building Access: Full</div>
+      </div>
+
+      <div class="id-card">
+        <div class="id-photo"></div>
+        <div class="role">Solvex Analytics — Employee ID</div>
+        <div class="name">Farah Sheikh</div>
+        <div style="font-size:10px;">Age 42 &nbsp;•&nbsp; HR Manager</div>
+        <div style="font-size:9px; margin-top:1mm; clear:both;">Department: HR &nbsp;|&nbsp; Building Access: Full, incl. Finance floor</div>
+      </div>
+    </div>
+
+    <div class="payroll" style="margin-top:6mm;">
+      <div style="font-family:var(--font-display); font-size:11px;">PAYROLL STUB — D. SOLANKI — PAY PERIOD ENDING FEB 15</div>
+      <table>
+        <tr><td>Gross Pay</td><td style="text-align:right;">$4,820.00</td></tr>
+        <tr><td>Standard Deductions</td><td style="text-align:right;">$740.00</td></tr>
+        <tr><td>Wage Garnishment — Court Order Ref. 2291-C</td><td style="text-align:right;">$1,150.00</td></tr>
+        <tr><td><strong>Net Pay</strong></td><td style="text-align:right;"><strong>$2,930.00</strong></td></tr>
+      </table>
+    </div>
+
+    <div style="position:absolute; top:180mm; right:14mm; width:65mm;" class="photo polaroid">
+      <div style="height:35mm; background:#555;"></div>
+      <div class="caption">Business card, unidentified — found in desk drawer (see Page 5)</div>
+    </div>
+
+    <div class="worksheet-box" style="margin-top:60mm;">
+      <div class="wtitle">Who's Who</div>
+      <div class="blank-line"></div>
+      <div class="blank-line"></div>
+    </div>
+  </div>
+
+  <div class="barcode-strip">
+    <div class="barcode"></div>
+    <div>CDF-001-BL &nbsp;•&nbsp; PAGE 06 / 18</div>
+  </div>
+</div>
+</body>
+</html>

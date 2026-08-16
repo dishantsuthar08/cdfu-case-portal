@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cyber Detective Files — Case Portal</title>
+<meta name="description" content="Work real-feeling cyber-crime case files, pass the quiz, sit the field exam, and climb the Bureau rankings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg cdfu-nav sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <span class="brand-mark">CD</span>
+      Cyber Detective Files
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav me-auto ms-lg-4">
+        <li class="nav-item"><a class="nav-link" data-nav="index.html" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" data-nav="cases.html" href="cases.html">Case Files</a></li>
+        <li class="nav-item"><a class="nav-link" data-nav="leaderboard.html" href="leaderboard.html">Bureau Rankings</a></li>
+        <li class="nav-item"><a class="nav-link" data-nav="badges.html" href="badges.html">Evidence Stamps</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0" id="nav-session-slot"></div>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <span class="folder-tag">● Unit 7 · Cyber Crime Investigation Cell</span>
+        <h1>Every case is a folder.<br>Every folder is a test.</h1>
+        <p class="lede">
+          Read the evidence like an investigator — printed emails, access logs,
+          witness statements, CCTV stills. Pass the case quiz, sit the field
+          exam, and earn your rank in the Bureau.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="cases.html" class="btn-stamp btn-stamp-gold">Browse Case Files</a>
+          <a href="signup.html" class="btn-stamp">Get Your Badge ID</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">18</div>
+            <div class="stat-label">Evidence Sheets · Case 001</div>
+          </div>
+          <div>
+            <div class="stat-num">6</div>
+            <div class="stat-label">Bureau Ranks</div>
+          </div>
+          <div>
+            <div class="stat-num">6</div>
+            <div class="stat-label">Evidence Stamps to Earn</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="board-card">
+          <div class="board-row"><span class="k">Case</span><span class="v">CDF-2026-0001</span></div>
+          <div class="board-row"><span class="k">Title</span><span class="v">Operation Black Login</span></div>
+          <div class="board-row"><span class="k">Category</span><span class="v">BEC / Vendor Fraud</span></div>
+          <div class="board-row"><span class="k">Loss</span><span class="v">$86,400 USD</span></div>
+          <div class="board-row"><span class="k">Evidence</span><span class="v">18 sheets, sequential</span></div>
+          <div class="board-row"><span class="k">Status</span><span class="v text-sticky">Active Investigation</span></div>
+          <div class="mt-3">
+            <a href="case.html?id=case-001" class="btn-file">Open Folder →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head text-center mx-auto" style="max-width:640px;">
+      <span class="eyebrow">How it works</span>
+      <h2>Four steps, same as a real desk assignment</h2>
+      <p class="mx-auto">No hints panel, no walkthrough. You get the folder, the objectives, and a deadline that doesn't exist — the rest is on you.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="panel h-100">
+          <div class="eyebrow mb-2">01</div>
+          <h3 class="h5">Open the folder</h3>
+          <p class="text-dim small mb-0">Work through the evidence sheets in order — photos, logs, statements, receipts.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel h-100">
+          <div class="eyebrow mb-2">02</div>
+          <h3 class="h5">Form a theory</h3>
+          <p class="text-dim small mb-0">Fill in the suspect board and investigator notes before you check anything.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel h-100">
+          <div class="eyebrow mb-2">03</div>
+          <h3 class="h5">Sit the quiz</h3>
+          <p class="text-dim small mb-0">Answer questions only the file can answer. Score enough and the case closes.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="panel h-100">
+          <div class="eyebrow mb-2">04</div>
+          <h3 class="h5">Sit the field exam</h3>
+          <p class="text-dim small mb-0">Apply the technique, not just the facts, and earn a Field Certified stamp.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--panel); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-7">
+        <span class="eyebrow">Bureau Rankings</span>
+        <h2>Points earn rank. Rank is public.</h2>
+        <p class="text-dim">Every closed case and every passed field exam adds Case Points (CP) to your Badge ID.
+          Six ranks stand between Recruit and Bureau Legend — see where the whole desk stands on the leaderboard.</p>
+        <a href="leaderboard.html" class="btn-file">View Bureau Rankings →</a>
+      </div>
+      <div class="col-lg-5">
+        <div class="panel">
+          <div id="rank-preview"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container text-center">
+    <span class="eyebrow">Ready when you are</span>
+    <h2 class="mt-2 mb-3">Case 001 is open. The folder won't wait.</h2>
+    <a href="cases.html" class="btn-stamp btn-stamp-gold">Browse Case Files</a>
+  </div>
+</section>
+
+<footer class="cdfu-footer">
+  <div class="container d-flex flex-wrap justify-content-between gap-3">
+    <div>Cyber Detective Files — Case Portal · Unit 7 Cyber Crime Investigation Cell (fictional). All cases are original fiction for training purposes.</div>
+    <div>© <span id="footer-year"></span> CDFU</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+  (async () => {
+    await initApp();
+    const { ranks } = await api("/api/ranks");
+    const previewEl = document.getElementById("rank-preview");
+    previewEl.innerHTML = ranks.map((r, i) => `
+      <div class="d-flex justify-content-between align-items-center py-2" style="border-bottom:1px dashed var(--line);">
+        <span style="color:${r.color}; font-family:var(--font-data); font-size:13px;">${i + 1}. ${r.name}</span>
+        <span class="text-faint text-data" style="font-size:12px;">${r.min}+ CP</span>
+      </div>
+    `).join("");
+  })();
+</script>
+</body>
+</html>

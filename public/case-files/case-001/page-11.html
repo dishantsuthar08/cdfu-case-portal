@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Page 11 — Access Logs</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .log-block{ background:#0d1117; color:#c9d1d9; font-family: var(--font-data); font-size:9px; padding:5mm; margin-top:5mm; line-height:1.7; border:1px solid #333; }
+  .log-block .line{ white-space:pre; }
+  .log-block .flagged{ color:#ff8181; background:rgba(255,0,0,.08); }
+  .log-title{ color:#7fd1ff; font-size:9px; margin-bottom:2mm; text-transform:uppercase; letter-spacing:.06em; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-content">
+    <div class="evidence-header">
+      <div class="block">
+        <div class="case-title">FIREWALL / VPN / AUTHENTICATION LOGS</div>
+        <div>Solvex Analytics IT Security — export for Cyber Crime Cell</div>
+      </div>
+      <div class="block" style="text-align:right;">
+        <div class="label">Evidence No.</div>
+        <div class="value">CDF-001-BL-011</div>
+      </div>
+    </div>
+
+    <div class="log-block">
+      <div class="log-title">VPN Authentication Log — Account: vrao_contractor</div>
+      <div class="line">Jan 22 09:58:11  AUTH_SUCCESS  user=vrao_contractor  src_ip=182.71.**.**  (known residential, prior pattern)</div>
+      <div class="line">Jan 22 18:04:47  SESSION_END   user=vrao_contractor  duration=8h06m</div>
+      <div class="line flagged">Jan 23 02:14:02  AUTH_SUCCESS  user=vrao_contractor  src_ip=45.132.**.**  (unrecognized, proxy/residential-relay range)</div>
+      <div class="line flagged">Jan 23 02:14:55  MOUNT  \\solvex-fs01\finance-shared  (read-only)</div>
+      <div class="line flagged">Jan 23 03:41:19  SESSION_END   user=vrao_contractor  duration=1h27m</div>
+    </div>
+
+    <div class="log-block">
+      <div class="log-title">Mail Sync Rule Audit — mailbox: a.kapoor@solvex.internal</div>
+      <div class="line">Nov 09 (prior)  RULE_CREATED  legacy contractor-assisted sync rule, forwards read receipts to support alias</div>
+      <div class="line flagged">Jan 23 02:31:40  RULE_ACCESSED  via vrao_contractor session, read-only mail index scan</div>
+      <div class="line">Feb 01           RULE_EXPIRED  automatic cleanup, no further access recorded</div>
+    </div>
+
+    <div class="stamp small blue" style="top:190mm; right:16mm;">ANOMALY CONFIRMED</div>
+
+    <div class="worksheet-box" style="margin-top:8mm;">
+      <div class="wtitle">Time Match</div>
+      Cross-reference the flagged 02:14 entries against Page 9 (recycle bin) and Page 6 (badge log). Whose credentials were used — and were they physically present?
+      <div class="blank-line" style="margin-top:3mm;"></div>
+    </div>
+  </div>
+
+  <div class="barcode-strip">
+    <div class="barcode"></div>
+    <div>CDF-001-BL &nbsp;•&nbsp; PAGE 11 / 18</div>
+  </div>
+</div>
+</body>
+</html>

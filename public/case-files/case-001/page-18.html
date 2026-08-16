@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Page 18 — Sealed Solution</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .envelope-cover{ height:297mm; display:flex; align-items:center; justify-content:center; position:relative; background:#c9ad78; }
+  .seal{ width:40mm; height:40mm; border-radius:50%; background:var(--stamp-red); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-display); font-size:11px; text-align:center; box-shadow:0 2mm 4mm rgba(0,0,0,.4); transform:rotate(-8deg); }
+  .solution-doc{ padding:16mm; font-size:11.5px; line-height:1.7; }
+  .solution-doc h2{ font-family:var(--font-display); font-size:16px; border-bottom:2px solid var(--ink); padding-bottom:2mm; }
+  .solution-doc .verdict{ background: rgba(158,43,37,.08); border-left:3px solid var(--stamp-red); padding:3mm 4mm; margin:4mm 0; }
+</style>
+</head>
+<body>
+
+<div class="page manila">
+  <div class="envelope-cover">
+    <div class="torn-edge" style="top:0;"></div>
+    <div style="text-align:center;">
+      <div style="font-family:var(--font-display); font-size:26px; letter-spacing:.1em; margin-bottom:6mm;">CASE SOLUTION</div>
+      <div class="seal">DO NOT<br>OPEN</div>
+      <div style="margin-top:10mm; font-family:var(--font-data); font-size:9px; letter-spacing:.05em;">SEAL BROKEN ONLY AFTER PAGE 17 IS COMPLETE</div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="page-content">
+    <div class="evidence-header">
+      <div class="block">
+        <div class="case-title">CASE SOLUTION — CDF-2026-0001</div>
+        <div>Operation Black Login — Full Resolution</div>
+      </div>
+      <div class="block" style="text-align:right;">
+        <div class="label">Evidence No.</div>
+        <div class="value">CDF-001-BL-018</div>
+      </div>
+    </div>
+
+    <div class="solution-doc">
+      <h2>What Actually Happened</h2>
+      <p>Solvex Analytics was defrauded by an external, financially motivated attacker — not by an insider acting maliciously. The fraud succeeded because two small, unconnected human mistakes gave the attacker everything they needed.</p>
+
+      <p><strong>1. The access:</strong> Vikram Rao, a remote IT contractor, was spear-phished with a fake freelance job offer from "Meridian Talent Partners" — a shell identity registered on the domain <em>meridian-systerns.com</em>. The attached "project brief" harvested his VPN credentials. The attacker used them, off-hours, to browse the finance shared drive and a legacy mail-sync rule Vikram had set up months earlier — no password ever needed.</p>
+
+      <p><strong>2. The internal detail:</strong> Separately, Devraj Solanki, under financial pressure, was contacted by a fake "market researcher" and shared a screenshot of the approved-vendor list for a small payment — never realizing it would be used for fraud.</p>
+
+      <p><strong>3. The fraud:</strong> Combining both, the attacker emailed Ananya Kapoor from <em>accounts@meridian-systerns.com</em>, referencing the real invoice number, requesting updated bank details. Because it was treated as an existing-vendor update, no verbal confirmation was required — and the payment went through.</p>
+
+      <div class="verdict">
+        <strong>Verdict:</strong> No one at Solvex acted with criminal intent. Vikram Rao and Devraj Solanki were each negligent, not complicit. Farah Sheikh's finance-floor visits were unrelated — a statutory compliance audit, confirmed by timestamps that fall entirely outside the fraud window. Ananya Kapoor followed process exactly as written; the process itself had a gap, since closed by Solvex Finance.
+        </div>
+
+      <p><strong>Recommendation on file:</strong> Verbal confirmation now required for any bank-detail change, existing vendor or not. Legacy mail-sync rules audited and disabled cell-wide.</p>
+
+      <p style="font-family:var(--font-data); font-size:9px; margin-top:8mm;">— End of Case File CDF-2026-0001 —</p>
+    </div>
+  </div>
+
+  <div class="barcode-strip">
+    <div class="barcode"></div>
+    <div>CDF-001-BL &nbsp;•&nbsp; PAGE 18 / 18 &nbsp;•&nbsp; CASE CLOSED</div>
+  </div>
+</div>
+
+</body>
+</html>

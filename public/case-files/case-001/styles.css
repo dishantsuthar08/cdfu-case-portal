@@ -1,0 +1,380 @@
+/* ==========================================================================
+   OPERATION BLACK LOGIN — Evidence Document System
+   Case: The Cyber Detective Files, Case 001
+
+   TOKEN SYSTEM
+   Color:
+     --manila       #C9AF7D  aged manila folder stock
+     --paper        #EEEAE0  photocopy / report paper
+     --paper-blue   #E3E7DE  thermal/fax paper cast
+     --ink          #1C1A17  primary type
+     --stamp-red    #9E2B25  evidence stamps, urgent marks
+     --custody-blue #29415C  chain-of-custody, official stamps
+     --sticky       #F0D563  sticky note yellow
+     --stain        rgba(107,78,42,.22)  coffee/age staining
+     --redact       #17140F  redaction bars
+   Type:
+     display / stamps  -> 'Special Elite' (typewriter, worn)
+     report body        -> 'Courier Prime' (monospace report copy)
+     handwriting         -> 'Caveat' (witness notes, sticky notes)
+     data / logs         -> 'JetBrains Mono' (terminal-accurate logs)
+   Layout: fixed A4 canvas (210mm x 297mm), printable, each page a
+     standalone "evidence sheet" that reads as photographed/scanned,
+     never centered or web-flat.
+   Signature element: the rotated red EVIDENCE stamp + torn manila
+     corner tab + barcode chain-of-custody strip anchoring every page.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:wght@400;700&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root{
+  --manila: #C9AF7D;
+  --manila-dark: #B49A66;
+  --paper: #EEEAE0;
+  --paper-blue: #E3E7DE;
+  --ink: #1C1A17;
+  --ink-soft: #3A362E;
+  --stamp-red: #9E2B25;
+  --custody-blue: #29415C;
+  --sticky: #F0D563;
+  --sticky-pink: #F2B6C0;
+  --stain: rgba(107,78,42,.22);
+  --redact: #17140F;
+  --line: rgba(28,26,23,.18);
+
+  --font-display: 'Special Elite', 'Courier New', monospace;
+  --font-body: 'Courier Prime', 'Courier New', monospace;
+  --font-hand: 'Caveat', cursive;
+  --font-data: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+*{ box-sizing: border-box; }
+
+html,body{
+  margin:0; padding:0;
+  background:#5c564a;
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------------
+   PAGE CANVAS — one A4 sheet per .page. On screen, sheets sit on a dark
+   "table" background with soft shadow so they read as physical objects.
+   At print, table chrome disappears and only the sheet content prints.
+--------------------------------------------------------------------- */
+.page{
+  position: relative;
+  width: 210mm;
+  min-height: 297mm;
+  margin: 14mm auto;
+  background: var(--paper);
+  box-shadow: 0 2mm 8mm rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.25);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.page.manila{ background: var(--manila); }
+.page.blueprint{ background: #12314a; color:#cfe6ff; }
+.page.thermal{ background: #f4f2ea; }
+
+/* subtle photocopy noise/grain, layered on every sheet */
+.page::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(0,0,0,.015) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.012) 0 1px, transparent 1px 4px);
+  mix-blend-mode: multiply;
+  pointer-events:none;
+  z-index: 1;
+}
+
+.page-content{
+  position: relative;
+  z-index: 2;
+  padding: 14mm 14mm 20mm 14mm;
+}
+
+/* ---------------------------------------------------------------------
+   EVIDENCE HEADER STRIP — appears on nearly every sheet
+--------------------------------------------------------------------- */
+.evidence-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 4mm;
+  margin-bottom: 6mm;
+  font-family: var(--font-data);
+  font-size: 9.5px;
+  letter-spacing:.02em;
+}
+.evidence-header .block{ line-height:1.5; }
+.evidence-header .label{ color: var(--ink-soft); text-transform:uppercase; letter-spacing:.08em; font-size:8px; }
+.evidence-header .value{ font-weight:700; }
+.evidence-header .case-title{
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing:.03em;
+}
+
+.chain-of-custody{
+  margin-top: 4mm;
+  border: 1px dashed var(--ink-soft);
+  padding: 2mm 3mm;
+  font-family: var(--font-data);
+  font-size: 8px;
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 2mm;
+}
+.chain-of-custody div span{ display:block; color:var(--ink-soft); font-size:7px; text-transform:uppercase; }
+
+/* barcode strip footer */
+.barcode-strip{
+  position:absolute;
+  bottom: 8mm; left:14mm; right:14mm;
+  display:flex; justify-content:space-between; align-items:center;
+  font-family: var(--font-data);
+  font-size: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 3mm;
+  z-index:2;
+}
+.barcode{
+  height: 8mm; width: 40mm;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 2px, var(--ink) 3px 4px, transparent 4px 6px);
+  opacity:.85;
+}
+
+/* ---------------------------------------------------------------------
+   STAMP — the signature element. Rotated, inked, slightly worn.
+--------------------------------------------------------------------- */
+.stamp{
+  position:absolute;
+  font-family: var(--font-display);
+  color: var(--stamp-red);
+  border: 3px solid var(--stamp-red);
+  padding: 2mm 5mm;
+  border-radius: 3px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size: 18px;
+  opacity:.85;
+  mix-blend-mode: multiply;
+  z-index: 3;
+  transform: rotate(-9deg);
+  box-shadow: 0 0 0 1px var(--stamp-red) inset;
+}
+.stamp::after{
+  content:"";
+  position:absolute; inset:-2px;
+  border: 1px solid var(--stamp-red);
+  border-radius: 4px;
+  opacity:.4;
+}
+.stamp.blue{ color:var(--custody-blue); border-color:var(--custody-blue); box-shadow:0 0 0 1px var(--custody-blue) inset; }
+.stamp.small{ font-size:12px; padding:1.5mm 3mm; }
+
+/* ---------------------------------------------------------------------
+   TAPE, PAPERCLIPS, STAPLES — physical fastening details
+--------------------------------------------------------------------- */
+.tape{
+  position:absolute;
+  width: 34mm; height: 11mm;
+  background: rgba(230,220,190,.55);
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 1mm 2mm rgba(0,0,0,.15);
+  z-index: 4;
+}
+.tape.torn::before, .tape.torn::after{
+  content:""; position:absolute; top:0; bottom:0; width:2mm;
+  background: inherit;
+}
+
+.paperclip{
+  position:absolute;
+  width: 8mm; height: 20mm;
+  border: 2.2px solid #7d8794;
+  border-radius: 4mm;
+  z-index: 5;
+  filter: drop-shadow(0 1mm 1mm rgba(0,0,0,.25));
+}
+.paperclip::after{
+  content:"";
+  position:absolute; top:2mm; left:1.6mm; right:1.6mm; bottom: 40%;
+  border: 2.2px solid #7d8794;
+  border-radius: 3mm;
+}
+
+.staple{
+  position:absolute;
+  width: 6mm; height: 2.4mm;
+  background: #9aa0a6;
+  z-index:5;
+  box-shadow: 0 .3mm .5mm rgba(0,0,0,.4);
+}
+
+/* ---------------------------------------------------------------------
+   STAINS, FOLDS, TEARS — imperfection layer
+--------------------------------------------------------------------- */
+.stain{
+  position:absolute;
+  border-radius:50%;
+  border: 2.5mm solid var(--stain);
+  background: transparent;
+  z-index:1;
+  pointer-events:none;
+}
+.fold-crease{
+  position:absolute; left:0; right:0; height: 1px;
+  background: rgba(0,0,0,.08);
+  box-shadow: 0 1px 1px rgba(255,255,255,.4);
+  z-index:1;
+}
+.torn-edge{
+  position:absolute; left:0; right:0; height: 4mm;
+  background: inherit;
+  clip-path: polygon(0% 0%,2% 100%,5% 20%,8% 90%,11% 10%,14% 100%,17% 15%,20% 85%,23% 5%,26% 95%,29% 20%,32% 80%,35% 10%,38% 100%,41% 15%,44% 90%,47% 5%,50% 100%,53% 10%,56% 90%,59% 15%,62% 95%,65% 5%,68% 90%,71% 10%,74% 100%,77% 15%,80% 85%,83% 5%,86% 95%,89% 15%,92% 90%,95% 5%,100% 100%,100% 0%);
+}
+
+/* ---------------------------------------------------------------------
+   EVIDENCE MARKER — yellow numbered crime-scene tent
+--------------------------------------------------------------------- */
+.marker{
+  position:absolute;
+  background: #F4D53A;
+  color:#1a1a1a;
+  font-family: var(--font-data);
+  font-weight:700;
+  font-size: 13px;
+  width: 8mm; height: 9mm;
+  display:flex; align-items:center; justify-content:center;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  z-index: 6;
+  box-shadow: 0 1mm 1.5mm rgba(0,0,0,.4);
+}
+
+/* ---------------------------------------------------------------------
+   PHOTOGRAPH FRAME — for crime scene / CCTV / desk photography
+--------------------------------------------------------------------- */
+.photo{
+  position:relative;
+  background:#000;
+  border: 3mm solid #fff;
+  box-shadow: 0 1mm 3mm rgba(0,0,0,.4);
+}
+.photo img{ display:block; width:100%; height:100%; object-fit:cover; }
+.photo .cctv-hud{
+  position:absolute; inset:3mm;
+  border:1px solid rgba(0,255,140,.6);
+  color: rgba(0,255,140,.85);
+  font-family: var(--font-data);
+  font-size: 8px;
+  padding: 2mm;
+  pointer-events:none;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.photo.polaroid{
+  background:#fdfdf8;
+  border: 3mm solid #fdfdf8;
+  border-bottom-width: 12mm;
+}
+.photo .caption{
+  font-family: var(--font-hand);
+  font-size: 14px;
+  color:#222;
+  text-align:center;
+  margin-top: 2mm;
+}
+
+/* ---------------------------------------------------------------------
+   STICKY NOTES & HANDWRITING
+--------------------------------------------------------------------- */
+.sticky-note{
+  position:absolute;
+  width: 42mm; min-height: 38mm;
+  background: var(--sticky);
+  box-shadow: 0 1.5mm 3mm rgba(0,0,0,.3);
+  padding: 3mm;
+  font-family: var(--font-hand);
+  font-size: 14px;
+  line-height:1.25;
+  color:#2b2508;
+  z-index: 5;
+}
+.sticky-note.pink{ background: var(--sticky-pink); color:#3a1620; }
+.handwritten{ font-family: var(--font-hand); font-size: 15px; color:#20232c; }
+.handwritten.pen-blue{ color:#1f3a6f; }
+.handwritten.pen-red{ color:var(--stamp-red); }
+
+/* ---------------------------------------------------------------------
+   REDACTION BARS
+--------------------------------------------------------------------- */
+.redacted{
+  display:inline-block;
+  background: var(--redact);
+  color: transparent;
+  border-radius: 1px;
+}
+
+/* ---------------------------------------------------------------------
+   INTERACTIVE / WORKSHEET ELEMENTS — every page invites writing
+--------------------------------------------------------------------- */
+.worksheet-box{
+  border: 1.5px solid var(--ink);
+  padding: 3mm 4mm;
+  margin: 4mm 0;
+}
+.worksheet-box .wtitle{
+  font-family: var(--font-display);
+  font-size: 10px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 1.5mm;
+  margin-bottom: 2mm;
+}
+.blank-line{
+  border-bottom: 1px solid var(--ink-soft);
+  height: 6mm;
+  margin: 2mm 0;
+}
+.tickbox{
+  display:inline-block;
+  width: 3.6mm; height: 3.6mm;
+  border: 1.4px solid var(--ink);
+  margin-right: 2mm;
+  vertical-align: middle;
+}
+.tag{
+  display:inline-block;
+  font-family: var(--font-data);
+  font-size: 8px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  border:1px solid var(--ink);
+  padding: .5mm 2mm;
+  margin-right:2mm;
+  background: rgba(255,255,255,.4);
+}
+
+/* ---------------------------------------------------------------------
+   PRINT RULES
+--------------------------------------------------------------------- */
+@media print{
+  html,body{ background:#fff; }
+  .page{
+    margin:0;
+    box-shadow:none;
+    page-break-after: always;
+    width: 210mm;
+    min-height: 297mm;
+  }
+  .no-print{ display:none !important; }
+}
+
+@page{
+  size: A4;
+  margin: 0;
+}

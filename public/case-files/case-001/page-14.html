@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Page 14 — Bank Transfer / Invoice</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .doc-split{ display:grid; grid-template-columns:1fr 1fr; gap:6mm; margin-top:6mm; }
+  .doc-box{ border:1px solid var(--ink); padding:4mm; font-family:var(--font-data); font-size:9px; line-height:1.7; }
+  .doc-box h4{ margin:0 0 2mm; font-size:9.5px; text-transform:uppercase; letter-spacing:.05em; }
+  .doc-box .diff{ background: rgba(158,43,37,.12); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-content">
+    <div class="evidence-header">
+      <div class="block">
+        <div class="case-title">BANK TRANSFER &amp; INVOICE RECORDS</div>
+        <div>Solvex Finance records + bank fraud team export</div>
+      </div>
+      <div class="block" style="text-align:right;">
+        <div class="label">Evidence No.</div>
+        <div class="value">CDF-001-BL-014</div>
+      </div>
+    </div>
+
+    <div class="doc-box" style="margin-top:6mm;">
+      <h4>Fraudulent "Bank Update" Email</h4>
+      From: Vishal Nanda, Accounts &lt;accounts@<span class="diff">meridian-systerns.com</span>&gt;<br>
+      To: a.kapoor@solvex.internal<br>
+      Date: Feb 9, 15:12<br>
+      Subject: Re: Invoice INV-M-2201 — Updated Remittance Details<br><br>
+      "Hi Ananya, following our recent bank migration, please update our remittance account ahead of the scheduled payment against Invoice INV-M-2201. New details attached. Apologies for the short notice — regards, Vishal."
+    </div>
+
+    <div class="doc-split">
+      <div class="doc-box">
+        <h4>Real Vendor Record (prior to Feb 9)</h4>
+        Meridian Systems Pvt. Ltd.<br>
+        Domain: meridian-systems.com<br>
+        Invoice Ref: INV-M-2201<br>
+        Account ending: •••• 4471
+      </div>
+      <div class="doc-box">
+        <h4>Updated Record (used Feb 11)</h4>
+        "Meridian Systems Pvt. Ltd."<br>
+        Domain: <span class="diff">meridian-systerns.com</span><br>
+        Invoice Ref: INV-M-2201 <em>(correct — reused)</em><br>
+        Account ending: •••• 8830 <em>(new, unverified)</em>
+      </div>
+    </div>
+
+    <div class="doc-box" style="margin-top:6mm;">
+      <h4>Wire Transfer Record</h4>
+      Date Processed: Feb 11, 16:04 &nbsp;|&nbsp; Amount: $86,400.00 &nbsp;|&nbsp; Authorized By: A. Kapoor<br>
+      Approval Note: "Existing vendor, bank detail update per email correspondence, invoice reference matched." No verbal confirmation logged (not required by policy for existing vendors).<br><br>
+      Recall Attempted: Feb 23, 14:00 — partial recovery only (~18% of principal).
+    </div>
+
+    <div class="stamp small" style="top:70mm; left:16mm; transform:rotate(-6deg);">DOMAIN MISMATCH</div>
+
+    <div class="worksheet-box" style="margin-top:6mm;">
+      <div class="wtitle">Discrepancy</div>
+      Overlay this domain against Page 7. Same substitution?
+      <div class="blank-line" style="margin-top:3mm;"></div>
+    </div>
+  </div>
+
+  <div class="barcode-strip">
+    <div class="barcode"></div>
+    <div>CDF-001-BL &nbsp;•&nbsp; PAGE 14 / 18</div>
+  </div>
+</div>
+</body>
+</html>
